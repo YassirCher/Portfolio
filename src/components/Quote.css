@@ -1,0 +1,85 @@
+.quote-container {
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: -2rem;
+    /* Pull up closer to Hero */
+    margin-bottom: 2rem;
+}
+
+.quote-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.quote-content.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-line {
+    height: 1px;
+    width: 0;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    transition: width 1s ease-out 0.5s;
+}
+
+.quote-content.animate .quote-line {
+    width: 100px;
+}
+
+.quote-text {
+    font-size: var(--font-size-xl);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin: 0;
+    display: inline-block;
+}
+
+.quote-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+    background: var(--gradient-gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.2));
+}
+
+.quote-content.animate .quote-word {
+    animation: wordReveal 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes wordReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .quote-content {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .quote-text {
+        font-size: var(--font-size-lg);
+        padding: 0 var(--spacing-md);
+    }
+}
