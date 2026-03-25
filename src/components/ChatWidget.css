@@ -361,6 +361,20 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.35) transparent;
+}
+
+.quick-questions-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.quick-questions-grid::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.35);
+    border-radius: 10px;
 }
 
 .quick-question-btn {
@@ -390,9 +404,9 @@
 
 .quick-question-text {
     flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
 }
 
 /* Input Area */
@@ -470,5 +484,6 @@
 
     .quick-questions-grid {
         grid-template-columns: 1fr;
+        max-height: 180px;
     }
 }
