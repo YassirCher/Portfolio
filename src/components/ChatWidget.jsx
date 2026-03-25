@@ -20,7 +20,7 @@ const formatMessage = (text) => {
         let formatted = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         // Bullet points
         if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
-            formatted = line.replace(/^[\s]*[\*\-]\s/, '• ');
+            formatted = formatted.replace(/^[\s]*[*-]\s+/, '• ');
         }
         return (
             <span key={i}>
@@ -44,6 +44,13 @@ const ChatWidget = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [showQuickQuestions, setShowQuickQuestions] = useState(true)
     const messagesEndRef = useRef(null)
+    const nextMessageIdRef = useRef(2)
+
+    const getNextMessageId = () => {
+        const id = nextMessageIdRef.current
+        nextMessageIdRef.current += 1
+        return id
+    }
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -60,7 +67,7 @@ const ChatWidget = () => {
         // Hide quick questions after first message
         setShowQuickQuestions(false);
 
-        const userMsg = { id: Date.now(), text: text, sender: 'user' }
+        const userMsg = { id: getNextMessageId(), text: text, sender: 'user' }
         setMessages(prev => [...prev, userMsg])
         setInput('')
         setIsLoading(true)
@@ -68,7 +75,7 @@ const ChatWidget = () => {
         const historyForApi = messages.filter(m => m.sender !== 'system')
         const botResponseText = await sendToGemini(historyForApi, text)
 
-        const botMsg = { id: Date.now() + 1, text: botResponseText, sender: 'bot' }
+        const botMsg = { id: getNextMessageId(), text: botResponseText, sender: 'bot' }
         setMessages(prev => [...prev, botMsg])
         setIsLoading(false)
     }

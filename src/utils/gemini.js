@@ -1,7 +1,7 @@
 import knowledgeBaseEmbeddings from '../data/knowledge_base_embeddings.json';
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const EMBEDDING_MODEL = 'text-embedding-004';
+const EMBEDDING_MODEL = 'gemini-embedding-001';
 const CHAT_MODEL = 'gemini-2.5-flash'; // Changed from 2.0 to 2.5 to match rag_agent.py
 
 // --- Helper Functions ---
@@ -19,8 +19,8 @@ const fetchWithRetry = async (url, options, retries = 5, baseBackoff = 5000) => 
         try {
             const response = await fetch(url, options);
 
-            if (response.status === 429) {
-                // Too Many Requests - Check for API-suggested retry delay
+            if (response.status === 429 || response.status === 503 || response.status >= 500) {
+                // Retry on rate limits and temporary server-side overload/errors
                 const data = await response.clone().json();
                 let waitTime = baseBackoff * Math.pow(2, i); // Default exponential backoff
 
@@ -36,7 +36,7 @@ const fetchWithRetry = async (url, options, retries = 5, baseBackoff = 5000) => 
                     }
                 }
 
-                console.warn(`Rate limited (429). Waiting ${Math.round(waitTime / 1000)}s before retry ${i + 1}/${retries}...`);
+                console.warn(`Transient API status (${response.status}). Waiting ${Math.round(waitTime / 1000)}s before retry ${i + 1}/${retries}...`);
                 await new Promise(resolve => setTimeout(resolve, waitTime));
                 continue;
             }
@@ -82,9 +82,9 @@ const retrieveContext = async (query) => {
             score: cosineSimilarity(queryEmbedding, chunk.embedding)
         }));
 
-        // Sort by score descending and take top 3
+        // Sort by score descending and take top 10 for broad CV/project questions
         scoredChunks.sort((a, b) => b.score - a.score);
-        return scoredChunks.slice(0, 3).map(c => c.text).join('\n\n');
+        return scoredChunks.slice(0, 10).map(c => c.text).join('\n\n');
     } catch (error) {
         console.error("Error retrieving context:", error);
         return ""; // Fallback to no context if embedding fails

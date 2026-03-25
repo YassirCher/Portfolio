@@ -5,28 +5,48 @@ const Skills = () => {
         {
             icon: 'fa-code',
             title: 'Languages',
-            skills: ['Python', 'Java', 'JavaScript', 'C', 'SQL', 'Dart']
+            skills: ['Python', 'Java', 'JavaScript', 'C', 'SQL', 'Dart', 'CypherQL', 'Cassandra QL']
         },
         {
             icon: 'fa-layer-group',
             title: 'Frameworks & Libraries',
-            skills: ['PyTorch', 'TensorFlow', 'Spring Boot', 'Angular', 'React', 'Tailwind CSS', 'FastAPI', 'Flask', 'Hugging Face Transformers', 'Scikit-learn']
+            skills: ['PyTorch', 'TensorFlow', 'Keras', 'Scikit-learn', 'Hugging Face', 'Transformers', 'Spring Boot', 'Angular', 'React', 'Tailwind CSS', 'FastAPI', 'Flask', 'LangChain', 'LangGraph']
         },
         {
             icon: 'fa-tools',
             title: 'Tools & Platforms',
-            skills: ['Docker', 'Azure', 'AWS', 'Git', 'Linux', 'Jupyter', 'Postman']
+            skills: ['Docker', 'Docker Compose', 'Azure', 'AWS', 'Git', 'Linux', 'Jupyter', 'Postman', 'Nginx', 'GitHub Actions']
+        },
+        {
+            icon: 'fa-database',
+            title: 'Databases & Data Systems',
+            skills: ['Neo4j', 'Cassandra', 'SQL', 'ChromaDB', 'Vector Databases', 'Semantic Search', 'Hadoop', 'Pig', 'Hive']
+        },
+        {
+            icon: 'fa-project-diagram',
+            title: 'Deep Learning Architectures',
+            skills: ['MLP', 'CNN', 'RNN', 'LSTM', 'GRU', 'GNN', 'Autoencoders', 'Transformers', 'Encoder-Decoder']
+        },
+        {
+            icon: 'fa-sliders-h',
+            title: 'Machine Learning Algos',
+            skills: ['XGBoost', 'Linear Regression', 'Logistic Regression', 'KNN', 'Decision Tree', 'Random Forest', 'Naive Bayes', 'K-Means', 'PCA', 'DBSCAN', 'HDBSCAN']
         },
         {
             icon: 'fa-lightbulb',
             title: 'Concepts',
-            skills: ['RAG', 'MLOps', 'Computer Vision', 'LLM Fine-tuning', 'Agentic AI', 'Data Structures']
+            skills: ['RAG', 'Agentic RAG', 'Embeddings', 'LoRA', 'LLM Fine-tuning', 'Prompt Engineering', 'Multi-Agent Systems', 'MCP', 'LLMOps', 'Computer Vision', 'Medical NLP', 'MLOps', 'Model Evaluation']
+        },
+        {
+            icon: 'fa-chart-line',
+            title: 'Data Science Stack',
+            skills: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn']
         }
     ]
 
     const softSkills = [
-        { icon: 'fa-lightbulb', label: 'Problem Solving' },
-        { icon: 'fa-rocket', label: 'Autonomous Work' },
+        { icon: 'fa-lightbulb', label: 'Critical Thinking & Problem Solving' },
+        { icon: 'fa-rocket', label: 'Results-Driven Execution' },
         { icon: 'fa-users', label: 'Team Collaboration' },
         { icon: 'fa-comments', label: 'Technical Communication' }
     ]

@@ -2,10 +2,10 @@ import './About.css'
 
 const About = () => {
     const highlights = [
-        { icon: 'fa-brain', title: 'AI & ML', desc: 'PyTorch, TensorFlow, Transformers, Scikit-learn' },
-        { icon: 'fa-robot', title: 'Gen AI', desc: 'LLMs, RAG, Fine-tuning' },
-        { icon: 'fa-eye', title: 'Computer Vision', desc: 'YOLOv8, CNNs, Medical Imaging' },
-        { icon: 'fa-cloud', title: 'MLOps', desc: 'Docker, Azure, CI/CD' },
+        { icon: 'fa-brain', title: 'AI & ML', desc: 'PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face' },
+        { icon: 'fa-robot', title: 'Gen AI & NLP', desc: 'Mistral/Llama/Qwen, RAG, LoRA, LangChain, LangGraph' },
+        { icon: 'fa-eye', title: 'Vision & Medical AI', desc: 'YOLOv8, OpenCV, MRI Analysis, Grad-CAM' },
+        { icon: 'fa-database', title: 'Data & Systems', desc: 'Neo4j, ChromaDB, Vector Search, Agentic Pipelines' },
     ]
 
     return (
@@ -19,12 +19,12 @@ const About = () => {
                     <div className="about-text">
                         <p className="about-intro">
                             I'm a <strong>Master's student in Data Science & AI</strong> at Université Moulay Ismail, Faculty of Science Meknes,
-                            with hands-on experience building production-ready AI systems.
+                            with hands-on experience building production-ready AI systems and research-driven deep learning models.
                         </p>
                         <p>
                             My expertise spans from fine-tuning large language models like <strong>Mistral 7B</strong> to developing
-                            real-time computer vision systems with <strong>YOLOv8</strong>. I'm passionate about creating AI solutions
-                            that solve real-world problems, from medical imaging diagnostics to intelligent assistants.
+                            real-time computer vision systems with <strong>YOLOv8</strong> and advanced <strong>Medical NLP</strong> pipelines.
+                            I'm passionate about bridging research and real-world deployment through scalable MLOps and agentic AI architectures.
                         </p>
                         <div className="about-highlights">
                             {highlights.map((item, index) => (
@@ -56,7 +56,8 @@ const About = () => {
                                     {'        '}self.interests = [{'\n'}
                                     {'            '}<span className="string">"Computer Vision"</span>,{'\n'}
                                     {'            '}<span className="string">"Generative AI"</span>,{'\n'}
-                                    {'            '}<span className="string">"MLOps"</span>{'\n'}
+                                    {'            '}<span className="string">"MLOps"</span>,{'\n'}
+                                    {'            '}<span className="string">"LLMOps"</span>{'\n'}
                                     {'        '}]{'\n'}
                                     {'\n'}
                                     {'    '}<span className="keyword">def</span> <span className="function">current_focus</span>(self):{'\n'}

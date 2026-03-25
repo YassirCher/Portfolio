@@ -3,7 +3,6 @@ import './Quote.css'
 
 const Quote = () => {
     const quoteText = "The best way to predict the future is to invent it."
-    const author = "Alan Kay"
     const [isVisible, setIsVisible] = useState(false)
     const quoteRef = useRef(null)
 
@@ -17,12 +16,14 @@ const Quote = () => {
             { threshold: 0.5 }
         )
 
-        if (quoteRef.current) {
-            observer.observe(quoteRef.current)
+        const observedNode = quoteRef.current
+
+        if (observedNode) {
+            observer.observe(observedNode)
         }
 
         return () => {
-            if (quoteRef.current) observer.unobserve(quoteRef.current)
+            if (observedNode) observer.unobserve(observedNode)
         }
     }, [])
 

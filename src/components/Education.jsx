@@ -6,7 +6,7 @@ const Education = () => {
             degree: 'Master of Excellence in Data Science & AI',
             school: 'Université Moulay Ismail, Faculty of Science Meknes',
             period: '2024 – 2026',
-            details: 'Currently in S3 • S1 & S2 Grade: Good (Bien)',
+            details: 'Currently in S4 (Seeking PFE) • S1 & S2 Grade: Good (Bien)',
             icon: 'fa-graduation-cap'
         },
         {

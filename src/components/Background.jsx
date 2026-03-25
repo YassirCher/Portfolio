@@ -29,68 +29,61 @@ const Background = () => {
             y: null
         }
 
-        window.addEventListener('mousemove', (e) => {
+        const handleMouseMove = (e) => {
             mouse.x = e.x
             mouse.y = e.y
-        })
+        }
 
-        window.addEventListener('mouseout', () => {
+        const handleMouseOut = () => {
             mouse.x = null
             mouse.y = null
-        })
+        }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width
-                this.y = Math.random() * canvas.height
-                this.vx = (Math.random() - 0.5) * 0.5 // Velocity X
-                this.vy = (Math.random() - 0.5) * 0.5 // Velocity Y
-                this.size = Math.random() * 2 + 1
-                this.color = 'rgba(99, 102, 241, 0.5)' // Primary color base
-            }
+        window.addEventListener('mousemove', handleMouseMove)
+        window.addEventListener('mouseout', handleMouseOut)
 
+        const createParticle = () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 2 + 1,
+            color: 'rgba(99, 102, 241, 0.5)',
             update() {
                 this.x += this.vx
                 this.y += this.vy
 
-                // Friction to stabilize movement
                 this.vx *= 0.98
                 this.vy *= 0.98
 
-                // Bounce off edges
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1
 
-                // Mouse interaction
                 if (mouse.x != null) {
-                    let dx = mouse.x - this.x
-                    let dy = mouse.y - this.y
-                    let distance = Math.sqrt(dx * dx + dy * dy)
+                    const dx = mouse.x - this.x
+                    const dy = mouse.y - this.y
+                    const distance = Math.sqrt(dx * dx + dy * dy)
 
-                    if (distance < mouseDistance) {
+                    if (distance > 0 && distance < mouseDistance) {
                         const forceDirectionX = dx / distance
                         const forceDirectionY = dy / distance
                         const force = (mouseDistance - distance) / mouseDistance
-
-                        // Stronger pull effect (Antigravity-like)
-                        const direction = 1
-                        this.vx += forceDirectionX * force * 0.2 * direction // Increased force
-                        this.vy += forceDirectionY * force * 0.2 * direction
+                        this.vx += forceDirectionX * force * 0.2
+                        this.vy += forceDirectionY * force * 0.2
                     }
                 }
-            }
-
+            },
             draw() {
                 ctx.beginPath()
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
                 ctx.fillStyle = this.color
                 ctx.fill()
             }
-        }
+        })
 
         // Initialize particles
         for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle())
+            particles.push(createParticle())
         }
 
         const animate = () => {
@@ -141,6 +134,8 @@ const Background = () => {
 
         return () => {
             window.removeEventListener('resize', handleResize)
+            window.removeEventListener('mousemove', handleMouseMove)
+            window.removeEventListener('mouseout', handleMouseOut)
             cancelAnimationFrame(animationFrameId)
         }
     }, [])

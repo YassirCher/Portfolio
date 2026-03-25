@@ -4,6 +4,7 @@ const Contact = () => {
     const contactInfo = [
         { icon: 'fa-envelope', label: 'Email', value: 'cherguiyassir1@gmail.com', href: 'mailto:cherguiyassir1@gmail.com' },
         { icon: 'fa-phone', label: 'Phone', value: '+212 693 534 651', href: 'tel:+212693534651' },
+        { icon: 'fa-globe', label: 'Website', value: 'chergui-yassir.vercel.app', href: 'https://chergui-yassir.vercel.app' },
         { icon: 'fa-map-marker-alt', label: 'Location', value: 'Meknès, Morocco', href: '#' },
     ]
 

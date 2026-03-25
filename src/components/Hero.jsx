@@ -6,9 +6,9 @@ const Hero = () => {
         // Typing Effect
         const titles = [
             'Data Science & AI Engineer',
-            'Computer Vision Specialist',
-            'LLM Fine-tuning Expert',
-            'MLOps Engineer'
+            'Computer Vision & Medical AI',
+            'Agentic RAG Engineer',
+            'LLM Fine-tuning Expert'
         ]
 
         let titleIndex = 0
@@ -89,15 +89,15 @@ const Hero = () => {
                     <span className="title-gradient" ref={titleElement}>Data Science & AI Engineer</span>
                 </div>
                 <p className="hero-description animate-fade-in-up">
-                    Master's student specializing in <strong>Computer Vision</strong>, <strong>Generative AI</strong>, and <strong>MLOps</strong>.
-                    Designing and deploying end-to-end AI systems including real-time object detection, LLM fine-tuning, and production-ready ML pipelines.
+                    Master's student specializing in <strong>Computer Vision</strong>, <strong>Medical AI</strong>, <strong>Generative AI</strong>, and <strong>NLP</strong>.
+                    Designing production-grade AI systems including multi-agent RAG pipelines, real-time detection models, and cloud-deployed MLOps workflows.
                 </p>
                 <div className="hero-cta animate-fade-in-up">
                     <a href="#contact" className="btn btn-primary">
                         <i className="fas fa-paper-plane"></i>
                         Get in Touch
                     </a>
-                    <a href="/CV_Yassir_Chergui.pdf" download className="btn btn-secondary">
+                    <a href="/resume_CHERGUI_Yassir.pdf" download className="btn btn-secondary">
                         <i className="fas fa-download"></i>
                         Download CV
                     </a>

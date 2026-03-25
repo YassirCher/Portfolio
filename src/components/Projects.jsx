@@ -101,6 +101,47 @@ const Projects = () => {
             metrics: ['MCP Protocol'],
             icon: 'fa-cogs',
             github: 'https://github.com/YassirCher/SDMW-MCP'
+        },
+        {
+            title: 'Agentic AI Research Assistant (Azure)',
+            description: 'Production-ready multi-agent RAG research assistant with session-isolated retrieval, async document ingestion, citation-aware responses, and full-stack cloud-ready deployment.',
+            tags: ['LangGraph', 'LangChain', 'FastAPI', 'React', 'ChromaDB', 'Docker', 'Azure'],
+            metrics: ['Multi-Agent RAG', 'Production Ready'],
+            icon: 'fa-brain',
+            github: 'https://github.com/YassirCher/agentic-ai-research-assistant-azure',
+            featured: true
+        },
+        {
+            title: 'Smart Job Matcher (Neo4j + AI)',
+            description: 'Big data HR platform for semantic job-candidate matching using graph analytics and LLM support, with dynamic career path visualization.',
+            tags: ['Spring Boot', 'Angular', 'Neo4j', 'Groq LLM', 'D3.js'],
+            metrics: ['Graph AI', 'Semantic Matching'],
+            icon: 'fa-sitemap',
+            github: 'https://github.com/YassirCher/Smart-Job-Matcher-Neo4j-AI'
+        },
+        {
+            title: 'DDI Relation Extraction (Medical NLP)',
+            description: 'Biomedical NLP research project for Drug-Drug Interaction extraction with 30+ trained models and Flask dashboard for real-time model comparison.',
+            tags: ['BioBERT', 'BiLSTM', 'PyTorch', 'Flask', 'Medical NLP'],
+            metrics: ['30+ Models', 'Research Project'],
+            icon: 'fa-notes-medical',
+            github: 'https://github.com/YassirCher/DDI-Relation-Extraction-NLP'
+        },
+        {
+            title: 'Video Violence Detection Web App',
+            description: 'End-to-end violence detection system with FastAPI backend and React frontend, benchmarking CNN-LSTM, R(2+1)D, YOLO+LSTM, and VideoMAE models.',
+            tags: ['FastAPI', 'React', 'VideoMAE', 'Computer Vision'],
+            metrics: ['F1: 0.98', 'Video AI'],
+            icon: 'fa-video',
+            github: 'https://github.com/YassirCher/Video-Violence-Detection-Web-App'
+        },
+        {
+            title: 'DL Face Recognition App',
+            description: 'Trained and benchmarked 90 face-recognition model combinations, with an inference app and interactive dashboard for metric-driven model analysis.',
+            tags: ['Face Recognition', 'Deep Learning', 'Model Benchmarking'],
+            metrics: ['90 Models', 'Interactive Dashboard'],
+            icon: 'fa-user-check',
+            github: 'https://github.com/YassirCher/dl-face-recognition-app'
         }
     ]
 
