@@ -1,8 +1,12 @@
 import knowledgeBaseEmbeddings from '../data/knowledge_base_embeddings.json';
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 const EMBEDDING_MODEL = 'gemini-embedding-001';
-const CHAT_MODEL = 'gemini-2.5-flash'; // Changed from 2.0 to 2.5 to match rag_agent.py
+const GEMINI_CHAT_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash'];
+const GROQ_CHAT_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+const GROQ_MAX_TOKENS = 800;
+const GROQ_CONTEXT_CHAR_LIMIT = 12000;
 
 // --- Helper Functions ---
 
@@ -13,15 +17,35 @@ const cosineSimilarity = (vecA, vecB) => {
     return dotProduct / (magnitudeA * magnitudeB);
 };
 
-// Improved retry logic with longer waits and parsing API retry suggestions
-const fetchWithRetry = async (url, options, retries = 5, baseBackoff = 5000) => {
+const fetchWithRetry = async (
+    url,
+    options,
+    {
+        retries = 2,
+        baseBackoff = 1500,
+        failFastStatuses = [],
+        timeoutMs = 20000
+    } = {}
+) => {
     for (let i = 0; i < retries; i++) {
         try {
-            const response = await fetch(url, options);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+            const response = await fetch(url, { ...options, signal: controller.signal });
+            clearTimeout(timeoutId);
+
+            if (failFastStatuses.includes(response.status)) {
+                throw new Error(`Fail-fast status ${response.status}`);
+            }
 
             if (response.status === 429 || response.status === 503 || response.status >= 500) {
                 // Retry on rate limits and temporary server-side overload/errors
-                const data = await response.clone().json();
+                let data = null;
+                try {
+                    data = await response.clone().json();
+                } catch {
+                    data = null;
+                }
                 let waitTime = baseBackoff * Math.pow(2, i); // Default exponential backoff
 
                 // Try to parse the retry delay from the API response
@@ -54,9 +78,13 @@ const fetchWithRetry = async (url, options, retries = 5, baseBackoff = 5000) => 
 
 
 const getEmbedding = async (text) => {
+    if (!GEMINI_API_KEY) {
+        throw new Error('Missing VITE_GEMINI_API_KEY for embedding retrieval');
+    }
+
     // API endpoint for embedding
     const response = await fetchWithRetry(
-        `https://generativelanguage.googleapis.com/v1beta/models/${EMBEDDING_MODEL}:embedContent?key=${API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${EMBEDDING_MODEL}:embedContent?key=${GEMINI_API_KEY}`,
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -64,6 +92,11 @@ const getEmbedding = async (text) => {
                 model: `models/${EMBEDDING_MODEL}`,
                 content: { parts: [{ text }] }
             })
+        },
+        {
+            retries: 2,
+            baseBackoff: 1000,
+            timeoutMs: 15000
         }
     );
 
@@ -91,12 +124,122 @@ const retrieveContext = async (query) => {
     }
 };
 
+const generateWithGemini = async (contents) => {
+    if (!GEMINI_API_KEY) {
+        throw new Error('Missing VITE_GEMINI_API_KEY for Gemini chat');
+    }
+
+    for (const model of GEMINI_CHAT_MODELS) {
+        try {
+            const response = await fetchWithRetry(
+                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents })
+                },
+                {
+                    retries: 1,
+                    baseBackoff: 500,
+                    timeoutMs: 12000,
+                    failFastStatuses: [429]
+                }
+            );
+
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error.message || JSON.stringify(data.error));
+            }
+
+            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (text) {
+                return {
+                    text,
+                    responder: `Gemini (${model})`
+                };
+            }
+        } catch (error) {
+            console.warn(`Gemini model ${model} failed:`, error);
+        }
+    }
+
+    throw new Error('All Gemini chat models failed');
+};
+
+const generateWithGroq = async (context, userMessage) => {
+    if (!GROQ_API_KEY) {
+        throw new Error('Missing VITE_GROQ_API_KEY for Groq fallback');
+    }
+
+    const safeContext = (context || '').slice(0, GROQ_CONTEXT_CHAR_LIMIT);
+    const systemPrompt = [
+        'You are an intelligent portfolio assistant for Yassir Chergui, a Data Science & AI Engineer.',
+        'Answer questions using the provided context only.',
+        'Be precise and concise. Keep answers under 4 short sentences unless the user asks for details.',
+        'If information is not present in context, clearly say so.'
+    ].join(' ');
+
+    for (const model of GROQ_CHAT_MODELS) {
+        try {
+            const response = await fetchWithRetry(
+                'https://api.groq.com/openai/v1/chat/completions',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${GROQ_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model,
+                        max_tokens: GROQ_MAX_TOKENS,
+                        temperature: 0.2,
+                        messages: [
+                            {
+                                role: 'system',
+                                content: systemPrompt
+                            },
+                            {
+                                role: 'user',
+                                content: `Context:\n${safeContext || 'No specific context found.'}\n\nQuestion: ${userMessage}`
+                            }
+                        ]
+                    })
+                },
+                {
+                    retries: 2,
+                    baseBackoff: 800,
+                    timeoutMs: 15000
+                }
+            );
+
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error.message || JSON.stringify(data.error));
+            }
+
+            const text = data?.choices?.[0]?.message?.content?.trim();
+            if (text) {
+                return {
+                    text,
+                    responder: `Groq (${model})`
+                };
+            }
+        } catch (error) {
+            console.warn(`Groq model ${model} failed:`, error);
+        }
+    }
+
+    throw new Error('All Groq fallback models failed');
+};
+
 // --- Main Function ---
 
 export const sendToGemini = async (history, userMessage) => {
+    let context = '';
+
     try {
         // 1. Retrieve relevant context based on user query
-        const context = await retrieveContext(userMessage);
+        context = await retrieveContext(userMessage);
 
         const SYSTEM_PROMPT = `
 You are an intelligent portfolio assistant for Yassir Chergui, a Data Science & AI Engineer.
@@ -138,27 +281,31 @@ INSTRUCTIONS:
             parts: [{ text: userMessage }]
         });
 
-        // 3. Send to Chat Model with Retry
-        const response = await fetchWithRetry(
-            `https://generativelanguage.googleapis.com/v1beta/models/${CHAT_MODEL}:generateContent?key=${API_KEY}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents })
-            }
-        );
-
-        const data = await response.json();
-
-        if (data.error) {
-            console.error("Gemini API Error:", data.error);
-            return "I'm having trouble connecting to my brain right now. Please try again later.";
-        }
-
-        return data.candidates[0].content.parts[0].text;
+        // 3. Try Gemini first
+        const geminiResult = await generateWithGemini(contents);
+        return {
+            text: geminiResult.text,
+            responder: geminiResult.responder,
+            isError: false
+        };
 
     } catch (error) {
-        console.error("Chat Error:", error);
-        return "Something went wrong. Please check your internet connection.";
+        console.error('Gemini Error, trying Groq fallback:', error);
+
+        try {
+            const groqResult = await generateWithGroq(context, userMessage);
+            return {
+                text: groqResult.text,
+                responder: groqResult.responder,
+                isError: false
+            };
+        } catch (fallbackError) {
+            console.error('Groq Fallback Error:', fallbackError);
+            return {
+                text: "I couldn't generate a response right now. Please try again in a moment.",
+                responder: 'Error',
+                isError: true
+            };
+        }
     }
 };

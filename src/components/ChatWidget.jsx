@@ -10,6 +10,13 @@ const QUICK_QUESTIONS = [
     { icon: '🎓', text: 'What is his education?' },
 ]
 
+const createTimestamp = () => new Date().getTime()
+
+const formatTimestamp = (timestamp) => {
+    if (!timestamp) return '--:--'
+    return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
 // Simple markdown-like text formatting
 const formatMessage = (text) => {
     if (!text) return null;
@@ -37,7 +44,9 @@ const ChatWidget = () => {
         {
             id: 1,
             text: "Hi there! 👋 I'm Yassir's AI Assistant.\n\nAsk me anything about his **projects**, **skills**, or **experience**!",
-            sender: 'bot'
+            sender: 'bot',
+            createdAt: createTimestamp(),
+            responder: 'Assistant'
         }
     ])
     const [input, setInput] = useState('')
@@ -67,15 +76,27 @@ const ChatWidget = () => {
         // Hide quick questions after first message
         setShowQuickQuestions(false);
 
-        const userMsg = { id: getNextMessageId(), text: text, sender: 'user' }
+        const userMsg = {
+            id: getNextMessageId(),
+            text: text,
+            sender: 'user',
+            createdAt: createTimestamp()
+        }
         setMessages(prev => [...prev, userMsg])
         setInput('')
         setIsLoading(true)
 
         const historyForApi = messages.filter(m => m.sender !== 'system')
-        const botResponseText = await sendToGemini(historyForApi, text)
+        const botResponse = await sendToGemini(historyForApi, text)
 
-        const botMsg = { id: getNextMessageId(), text: botResponseText, sender: 'bot' }
+        const botMsg = {
+            id: getNextMessageId(),
+            text: botResponse?.text || "I couldn't generate a response right now. Please try again in a moment.",
+            sender: 'bot',
+            responder: botResponse?.responder || 'Error',
+            isError: Boolean(botResponse?.isError),
+            createdAt: createTimestamp()
+        }
         setMessages(prev => [...prev, botMsg])
         setIsLoading(false)
     }
@@ -119,7 +140,7 @@ const ChatWidget = () => {
                             <h3>Portfolio AI</h3>
                             <span className="status-indicator">
                                 <span className="status-dot"></span>
-                                Online • Powered by Gemini
+                                Online • Gemini + Groq Fallback
                             </span>
                         </div>
                     </div>
@@ -137,11 +158,12 @@ const ChatWidget = () => {
                                 </div>
                             )}
                             <div className="message-content">
-                                <div className="message-bubble">
+                                <div className={`message-bubble ${msg.isError ? 'error' : ''}`}>
                                     {formatMessage(msg.text)}
                                 </div>
                                 <span className="message-time">
-                                    {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    {formatTimestamp(msg.createdAt)}
+                                    {msg.sender === 'bot' && msg.responder ? ` • ${msg.responder}` : ''}
                                 </span>
                             </div>
                         </div>

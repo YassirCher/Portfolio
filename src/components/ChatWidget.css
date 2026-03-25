@@ -283,6 +283,11 @@
     border-bottom-left-radius: 4px;
 }
 
+.message.bot .message-bubble.error {
+    border-color: rgba(248, 113, 113, 0.45);
+    background: rgba(127, 29, 29, 0.18);
+}
+
 .message-time {
     font-size: 0.65rem;
     color: var(--color-text-muted);
