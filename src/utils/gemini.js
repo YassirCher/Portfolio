@@ -4,7 +4,7 @@ const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 const EMBEDDING_MODEL = 'gemini-embedding-001';
 const GEMINI_CHAT_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash'];
-const GROQ_CHAT_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+const GROQ_CHAT_MODELS = ['qwen/qwen3.6-27b'];
 const GROQ_MAX_TOKENS = 800;
 const GROQ_CONTEXT_CHAR_LIMIT = 12000;
 
