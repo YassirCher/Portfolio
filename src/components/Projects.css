@@ -96,6 +96,27 @@
     color: var(--color-primary-light);
 }
 
+.tag.private-tag {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    display: inline-flex;
+    align-items: center;
+}
+
+.project-link.private {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    cursor: not-allowed;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.project-link.private:hover {
+    transform: none !important;
+    background: rgba(239, 68, 68, 0.15) !important;
+    color: #ef4444 !important;
+}
+
 .project-title {
     font-size: var(--font-size-lg);
     font-weight: 600;

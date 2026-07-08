@@ -3,12 +3,13 @@ import './Projects.css'
 const Projects = () => {
     const projects = [
         {
-            title: 'AI E-commerce Agent (In Progress)',
+            title: 'AI E-commerce Agent',
             description: 'Finalizing an AI-powered e-commerce platform featuring a fine-tuned Mistral 7B Agentic AI and recommendation system. Uses HateBERT for hate speech detection. Developed with Spring Boot, Angular, and Tailwind CSS.',
             tags: ['Spring Boot', 'Angular', 'Tailwind', 'Mistral 7B', 'HateBERT'],
             metrics: ['Agentic AI', 'Microservices'],
             icon: 'fa-robot',
             github: 'https://github.com/YassirCher',
+            isPrivate: true,
             featured: true
         },
         {
@@ -159,9 +160,15 @@ const Projects = () => {
                             <div className="project-image">
                                 <div className="project-overlay">
                                     <div className="project-links">
-                                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link">
-                                            <i className="fab fa-github"></i>
-                                        </a>
+                                        {project.github && !project.isPrivate ? (
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link" title="View Code">
+                                                <i className="fab fa-github"></i>
+                                            </a>
+                                        ) : (
+                                            <span className="project-link private" title="Private Repository">
+                                                <i className="fas fa-lock"></i>
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="project-icon">
@@ -173,9 +180,18 @@ const Projects = () => {
                                     {project.tags.map((tag, i) => (
                                         <span className="tag" key={i}>{tag}</span>
                                     ))}
+                                    {project.isPrivate && (
+                                        <span className="tag private-tag">
+                                            <i className="fas fa-lock" style={{ marginRight: '4px' }}></i> Private Repo
+                                        </span>
+                                    )}
                                 </div>
                                 <h3 className="project-title">
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer">{project.title}</a>
+                                    {project.github && !project.isPrivate ? (
+                                        <a href={project.github} target="_blank" rel="noopener noreferrer">{project.title}</a>
+                                    ) : (
+                                        <span>{project.title}</span>
+                                    )}
                                 </h3>
                                 <p className="project-description">{project.description}</p>
                                 <div className="project-metrics">
