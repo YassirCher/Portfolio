@@ -35,7 +35,7 @@ const Skills = () => {
         {
             icon: 'fa-lightbulb',
             title: 'Concepts',
-            skills: ['RAG', 'Agentic RAG', 'Embeddings', 'LoRA', 'LLM Fine-tuning', 'Prompt Engineering', 'Multi-Agent Systems', 'MCP', 'LLMOps', 'Computer Vision', 'Medical NLP', 'MLOps', 'Model Evaluation']
+            skills: ['RAG', 'Agentic RAG', 'Embeddings', 'LoRA/QLoRA', 'Unsloth', 'LLM Fine-tuning', 'Prompt Engineering', 'Multi-Agent Systems', 'MCP', 'LLMOps', 'Computer Vision', 'Medical NLP', 'MLOps', 'Model Evaluation']
         },
         {
             icon: 'fa-chart-line',
