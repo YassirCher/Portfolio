@@ -81,7 +81,7 @@ const Hero = () => {
                 </div>
                 <div className="hero-badge reveal">
                     <span className="badge-dot"></span>
-                    <span>Available for 4-6 month PFE Internship</span>
+                    <span>Available for Internship</span>
                 </div>
                 <div className="hero-title reveal">
                     <span className="greeting">Hello, I'm</span>
@@ -90,7 +90,7 @@ const Hero = () => {
                 </div>
                 <p className="hero-description animate-fade-in-up">
                     Master's student specializing in <strong>Computer Vision</strong>, <strong>Medical AI</strong>, <strong>Generative AI</strong>, and <strong>NLP</strong>.
-                    Designing production-grade AI systems including multi-agent RAG pipelines, real-time detection models, and cloud-deployed MLOps workflows.
+                    Currently working on my final year project (PFE) while designing production-grade AI systems including multi-agent RAG pipelines, real-time detection models, and cloud-deployed MLOps workflows.
                 </p>
                 <div className="hero-cta animate-fade-in-up">
                     <a href="#contact" className="btn btn-primary">

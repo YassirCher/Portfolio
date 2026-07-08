@@ -4,7 +4,7 @@
 **Name:** Yassir Chergui
 **Title:** Data Science & AI Engineer
 **Focus:** Computer Vision, Generative AI, MLOps
-**Status:** Master's student in Data Science & AI at Université Moulay Ismail, Meknès. Available for 4-6 month PFE Internship.
+**Status:** Master's student in Data Science & AI at Université Moulay Ismail, Meknès. Currently working on final year project (PFE). Available for Internship.
 **Location:** Meknès, Morocco
 **Contact:** cherguiyassir1@gmail.com | +212 693 534 651
 
