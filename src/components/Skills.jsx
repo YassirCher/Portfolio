@@ -20,7 +20,7 @@ const Skills = () => {
         {
             icon: 'fa-database',
             title: 'Databases & Data Systems',
-            skills: ['Neo4j', 'Cassandra', 'SQL', 'ChromaDB', 'Vector Databases', 'Semantic Search', 'Hadoop', 'Pig', 'Hive']
+            skills: ['Neo4j', 'Cassandra', 'SQL', 'ChromaDB', 'Qdrant', 'FAISS', 'MinIO', 'Vector Databases', 'Semantic Search', 'Hadoop', 'Pig', 'Hive']
         },
         {
             icon: 'fa-project-diagram',
