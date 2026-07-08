@@ -13,6 +13,15 @@ const Projects = () => {
             featured: true
         },
         {
+            title: 'Biomedical LLM Fine-Tuning Benchmarks',
+            description: 'Benchmarked Unsloth QLoRA vs Standard Hugging Face QLoRA for fine-tuning Qwen 2.5-7B on PubMedQA biomedical classification. Unsloth achieved 1.28× speedup with 21.66% training time reduction while maintaining comparable 79% accuracy and 0.57 Macro F1.',
+            tags: ['Unsloth', 'QLoRA', 'Qwen 2.5-7B', 'PubMedQA', 'PEFT/LoRA', 'TRL', 'BitsAndBytes'],
+            metrics: ['1.28× Speedup', '79% Accuracy', '21.66% Faster'],
+            icon: 'fa-flask',
+            github: 'https://github.com/YassirCher/biomedical-llm-optimization',
+            featured: true
+        },
+        {
             title: 'Urban Security – Weapon Detection',
             description: 'Real-time weapon detection pipeline achieving >30 FPS with F1-Score: 0.9960 and mAP: 0.9612. Full stack from data annotation to REST API deployment.',
             tags: ['YOLOv8', 'Django', 'PyTorch'],
