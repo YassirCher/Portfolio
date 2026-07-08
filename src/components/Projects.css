@@ -166,18 +166,19 @@
     position: absolute;
     top: var(--spacing-sm);
     left: var(--spacing-sm);
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(15, 15, 20, 0.85);
     color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    border: 1px solid rgba(239, 68, 68, 0.4);
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
-    font-weight: 500;
-    backdrop-filter: blur(8px);
+    font-weight: 600;
+    backdrop-filter: blur(12px);
     z-index: 10;
     pointer-events: none;
     display: flex;
     align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 1024px) {
