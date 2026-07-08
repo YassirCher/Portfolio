@@ -22,7 +22,7 @@ const About = () => {
                             with hands-on experience building production-ready AI systems and research-driven deep learning models.
                         </p>
                         <p>
-                            My expertise spans from fine-tuning large language models like <strong>Mistral 7B</strong> to developing
+                            My expertise spans from fine-tuning large language models including <strong>DeepSeek, Qwen, Phi, Gemma, Mistral & Llama</strong> to developing
                             real-time computer vision systems with <strong>YOLOv8</strong> and advanced <strong>Medical NLP</strong> pipelines.
                             I'm passionate about bridging research and real-world deployment through scalable MLOps and agentic AI architectures.
                         </p>
@@ -54,10 +54,13 @@ const About = () => {
                                     {'        '}self.role = <span className="string">"AI Engineer"</span>{'\n'}
                                     {'        '}self.location = <span className="string">"Meknès, Morocco"</span>{'\n'}
                                     {'        '}self.interests = [{'\n'}
+                                    {'            '}<span className="string">"Agentic AI"</span>,{'\n'}
+                                    {'            '}<span className="string">"RAG Systems"</span>,{'\n'}
                                     {'            '}<span className="string">"Computer Vision"</span>,{'\n'}
-                                    {'            '}<span className="string">"Generative AI"</span>,{'\n'}
                                     {'            '}<span className="string">"MLOps"</span>,{'\n'}
-                                    {'            '}<span className="string">"LLMOps"</span>{'\n'}
+                                    {'            '}<span className="string">"LLMOps"</span>,{'\n'}
+                                    {'            '}<span className="string">"Deep Learning"</span>,{'\n'}
+                                    {'            '}<span className="string">"Data Science"</span>{'\n'}
                                     {'        '}]{'\n'}
                                     {'\n'}
                                     {'    '}<span className="keyword">def</span> <span className="function">current_focus</span>(self):{'\n'}
