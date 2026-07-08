@@ -5,8 +5,8 @@ const Projects = () => {
         {
             title: 'AI E-commerce Agent',
             description: 'Finalizing an AI-powered e-commerce platform featuring a fine-tuned Mistral 7B Agentic AI and recommendation system. Uses HateBERT for hate speech detection. Developed with Spring Boot, Angular, and Tailwind CSS.',
-            tags: ['Spring Boot', 'Angular', 'Tailwind', 'Mistral 7B', 'HateBERT'],
-            metrics: ['Agentic AI', 'Microservices'],
+            tags: ['Spring Boot', 'Angular', 'Tailwind', 'Mistral 7B', 'HateBERT', 'Agentic GraphRAG'],
+            metrics: ['Agentic AI', 'Microservices', 'GraphRAG'],
             icon: 'fa-robot',
             github: 'https://github.com/YassirCher',
             isPrivate: true,
@@ -167,6 +167,11 @@ const Projects = () => {
                     {projects.map((project, index) => (
                         <article className={`project-card ${project.featured ? 'featured' : ''}`} key={index}>
                             <div className="project-image">
+                                {project.isPrivate && (
+                                    <div className="private-badge-top">
+                                        <i className="fas fa-lock" style={{ marginRight: '4px' }}></i> Private
+                                    </div>
+                                )}
                                 <div className="project-overlay">
                                     <div className="project-links">
                                         {project.github && !project.isPrivate ? (
@@ -189,11 +194,6 @@ const Projects = () => {
                                     {project.tags.map((tag, i) => (
                                         <span className="tag" key={i}>{tag}</span>
                                     ))}
-                                    {project.isPrivate && (
-                                        <span className="tag private-tag">
-                                            <i className="fas fa-lock" style={{ marginRight: '4px' }}></i> Private Repo
-                                        </span>
-                                    )}
                                 </div>
                                 <h3 className="project-title">
                                     {project.github && !project.isPrivate ? (

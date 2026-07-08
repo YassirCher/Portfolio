@@ -162,6 +162,24 @@
     margin-top: var(--spacing-3xl);
 }
 
+.private-badge-top {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 1024px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
