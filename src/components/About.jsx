@@ -5,7 +5,7 @@ const About = () => {
         { icon: 'fa-brain', title: 'AI & ML', desc: 'PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face' },
         { icon: 'fa-robot', title: 'Gen AI & NLP', desc: 'Mistral/Llama/Qwen, RAG, LoRA, LangChain, LangGraph' },
         { icon: 'fa-eye', title: 'Vision & Medical AI', desc: 'YOLOv8, OpenCV, MRI Analysis, Grad-CAM' },
-        { icon: 'fa-database', title: 'Data & Systems', desc: 'Neo4j, ChromaDB, Vector Search, Agentic Pipelines' },
+        { icon: 'fa-database', title: 'Data & Systems', desc: 'Neo4j, ChromaDB, Qdrant, FAISS, MinIO, Agentic Pipelines' },
     ]
 
     return (
