@@ -1,6 +1,11 @@
+import { useState, useEffect } from 'react'
 import './Projects.css'
 
 const Projects = () => {
+    const [activeModal, setActiveModal] = useState(null)
+    const [lightboxImage, setLightboxImage] = useState(null)
+    const [activeThumb, setActiveThumb] = useState(0)
+
     const projects = [
         {
             title: 'AI E-commerce Agent',
@@ -28,7 +33,32 @@ const Projects = () => {
             metrics: ['F1: 99.60%', '30+ FPS'],
             icon: 'fa-shield-alt',
             github: 'https://github.com/YassirCher/Weapon_Detection_app',
-            featured: true
+            featured: true,
+            coverImage: '/projects/weapon-detection/main_dashboard_1.png',
+            galleryImages: [
+                {
+                    src: '/projects/weapon-detection/main_dashboard_1.png',
+                    caption: 'Main Dashboard — Statistics & Analytics'
+                },
+                {
+                    src: '/projects/weapon-detection/image_detection.png',
+                    caption: 'Image & Video Detection Interface'
+                },
+                {
+                    src: '/projects/weapon-detection/video_processing.png',
+                    caption: 'Detection Results & AI Assistant'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'YOLOv8 real-time detection at 30+ FPS',
+                    'Django REST API backend with full admin dashboard',
+                    'Automated report generation (CSV & PDF)',
+                    'AI Security Assistant powered by Gemini 2.0 Flash',
+                    'Multi-media support: images, videos, batch processing'
+                ],
+                techStack: ['YOLOv8', 'Django', 'PyTorch', 'REST API', 'Gemini 2.0 Flash', 'Chart.js']
+            }
         },
         {
             title: 'Fine-Tuning Mistral 7B',
@@ -155,6 +185,45 @@ const Projects = () => {
         }
     ]
 
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (activeModal !== null) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => { document.body.style.overflow = '' }
+    }, [activeModal])
+
+    // Close on Escape
+    useEffect(() => {
+        const handleKey = (e) => {
+            if (e.key === 'Escape') {
+                if (lightboxImage) setLightboxImage(null)
+                else if (activeModal !== null) closeModal()
+            }
+        }
+        window.addEventListener('keydown', handleKey)
+        return () => window.removeEventListener('keydown', handleKey)
+    }, [lightboxImage, activeModal])
+
+    const openModal = (project) => {
+        setActiveModal(project)
+        setActiveThumb(0)
+    }
+
+    const closeModal = () => {
+        setActiveModal(null)
+        setLightboxImage(null)
+        setActiveThumb(0)
+    }
+
+    const handleCardClick = (e, project) => {
+        if (!project.galleryImages) return
+        e.preventDefault()
+        openModal(project)
+    }
+
     return (
         <section className="section projects" id="projects">
             <div className="container">
@@ -165,17 +234,49 @@ const Projects = () => {
                 </div>
                 <div className="projects-grid">
                     {projects.map((project, index) => (
-                        <article className={`project-card ${project.featured ? 'featured' : ''}`} key={index}>
+                        <article
+                            className={`project-card ${project.featured ? 'featured' : ''} ${project.galleryImages ? 'has-gallery' : ''}`}
+                            key={index}
+                            onClick={(e) => handleCardClick(e, project)}
+                        >
                             <div className="project-image">
                                 {project.isPrivate && (
                                     <div className="private-badge-top">
                                         <i className="fas fa-lock" style={{ marginRight: '4px' }}></i> Private
                                     </div>
                                 )}
+                                {project.coverImage ? (
+                                    <img
+                                        src={project.coverImage}
+                                        alt={project.title}
+                                        className="project-cover-img"
+                                    />
+                                ) : (
+                                    <div className="project-icon">
+                                        <i className={`fas ${project.icon}`}></i>
+                                    </div>
+                                )}
+                                {project.galleryImages && (
+                                    <div className="project-image-badge">
+                                        <i className="fas fa-images"></i>
+                                        <span>{project.galleryImages.length}</span>
+                                    </div>
+                                )}
                                 <div className="project-overlay">
                                     <div className="project-links">
-                                        {project.github && !project.isPrivate ? (
-                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link" title="View Code">
+                                        {project.galleryImages ? (
+                                            <span className="project-link view-project" title="View Project Details">
+                                                <i className="fas fa-expand-alt"></i>
+                                            </span>
+                                        ) : project.github && !project.isPrivate ? (
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-link"
+                                                title="View Code"
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
                                                 <i className="fab fa-github"></i>
                                             </a>
                                         ) : (
@@ -185,9 +286,6 @@ const Projects = () => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="project-icon">
-                                    <i className={`fas ${project.icon}`}></i>
-                                </div>
                             </div>
                             <div className="project-content">
                                 <div className="project-tags">
@@ -196,8 +294,8 @@ const Projects = () => {
                                     ))}
                                 </div>
                                 <h3 className="project-title">
-                                    {project.github && !project.isPrivate ? (
-                                        <a href={project.github} target="_blank" rel="noopener noreferrer">{project.title}</a>
+                                    {project.github && !project.isPrivate && !project.galleryImages ? (
+                                        <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>{project.title}</a>
                                     ) : (
                                         <span>{project.title}</span>
                                     )}
@@ -214,6 +312,128 @@ const Projects = () => {
                         </article>
                     ))}
                 </div>
+
+                {/* ========== PROJECT MODAL WIDGET ========== */}
+                {activeModal && activeModal.galleryImages && (
+                    <div className="modal-backdrop" onClick={closeModal}>
+                        <div className="modal-widget" onClick={(e) => e.stopPropagation()}>
+                            {/* Close button */}
+                            <button className="modal-close" onClick={closeModal} aria-label="Close">
+                                <i className="fas fa-times"></i>
+                            </button>
+
+                            {/* Main image viewer */}
+                            <div className="modal-viewer">
+                                <img
+                                    src={activeModal.galleryImages[activeThumb].src}
+                                    alt={activeModal.galleryImages[activeThumb].caption}
+                                    className="modal-main-image"
+                                    onClick={() => setLightboxImage(activeModal.galleryImages[activeThumb])}
+                                />
+                                <div className="modal-image-caption">
+                                    {activeModal.galleryImages[activeThumb].caption}
+                                </div>
+                                {/* Nav arrows */}
+                                {activeModal.galleryImages.length > 1 && (
+                                    <>
+                                        <button
+                                            className="modal-nav modal-nav-prev"
+                                            onClick={() => setActiveThumb((activeThumb - 1 + activeModal.galleryImages.length) % activeModal.galleryImages.length)}
+                                            aria-label="Previous"
+                                        >
+                                            <i className="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button
+                                            className="modal-nav modal-nav-next"
+                                            onClick={() => setActiveThumb((activeThumb + 1) % activeModal.galleryImages.length)}
+                                            aria-label="Next"
+                                        >
+                                            <i className="fas fa-chevron-right"></i>
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+
+                            {/* Thumbnail strip */}
+                            <div className="modal-thumbnails">
+                                {activeModal.galleryImages.map((img, i) => (
+                                    <button
+                                        key={i}
+                                        className={`modal-thumb ${activeThumb === i ? 'active' : ''}`}
+                                        onClick={() => setActiveThumb(i)}
+                                    >
+                                        <img src={img.src} alt={img.caption} />
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Project info */}
+                            <div className="modal-info">
+                                <div className="modal-info-header">
+                                    <div className="modal-info-icon">
+                                        <i className={`fas ${activeModal.icon}`}></i>
+                                    </div>
+                                    <div>
+                                        <h3 className="modal-info-title">{activeModal.title}</h3>
+                                        <p className="modal-info-desc">{activeModal.description}</p>
+                                    </div>
+                                </div>
+
+                                <div className="modal-info-body">
+                                    {/* Highlights */}
+                                    {activeModal.detailInfo?.highlights && (
+                                        <div className="modal-highlights">
+                                            {activeModal.detailInfo.highlights.map((h, i) => (
+                                                <div className="modal-highlight-item" key={i}>
+                                                    <i className="fas fa-check"></i>
+                                                    <span>{h}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Tech + Metrics row */}
+                                    <div className="modal-tags-row">
+                                        {activeModal.detailInfo?.techStack?.map((tech, i) => (
+                                            <span className="modal-tech-tag" key={i}>{tech}</span>
+                                        ))}
+                                        {activeModal.metrics.map((m, i) => (
+                                            <span className="modal-metric-tag" key={`m-${i}`}>
+                                                <i className="fas fa-chart-line"></i> {m}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* GitHub CTA */}
+                                <a
+                                    href={activeModal.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="modal-github-btn"
+                                >
+                                    <i className="fab fa-github"></i>
+                                    For more details & project images, visit GitHub
+                                    <i className="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* ========== FULLSCREEN LIGHTBOX ========== */}
+                {lightboxImage && (
+                    <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
+                        <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                            <img src={lightboxImage.src} alt={lightboxImage.caption} />
+                            <p className="lightbox-caption">{lightboxImage.caption}</p>
+                        </div>
+                    </div>
+                )}
+
                 <div className="projects-cta">
                     <a href="https://github.com/YassirCher" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                         <i className="fab fa-github"></i>
