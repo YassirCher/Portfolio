@@ -278,7 +278,36 @@ const Projects = () => {
             tags: ['Spring Boot', 'Angular', 'Neo4j', 'Groq LLM', 'D3.js'],
             metrics: ['Graph AI', 'Semantic Matching'],
             icon: 'fa-sitemap',
-            github: 'https://github.com/YassirCher/Smart-Job-Matcher-Neo4j-AI'
+            github: 'https://github.com/YassirCher/Smart-Job-Matcher-Neo4j-AI',
+            coverImage: '/projects/smart-job-matcher/dashboard_main_page.png',
+            galleryImages: [
+                {
+                    src: '/projects/smart-job-matcher/dashboard_main_page.png',
+                    caption: 'Main Dashboard — Smart HR Platform Overview'
+                },
+                {
+                    src: '/projects/smart-job-matcher/profile_resume_intelligence.png',
+                    caption: 'Profile Analysis — Resume & Portfolio Intelligence Engine'
+                },
+                {
+                    src: '/projects/smart-job-matcher/create_job_from_prompt.png',
+                    caption: 'Job Creation — Generating Structured Jobs from Prompts'
+                },
+                {
+                    src: '/projects/smart-job-matcher/career_path_predictor.png',
+                    caption: 'Career Coaching — Graph-Based Career Path Predictor'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'Semantic job-candidate matching using Neo4j graph databases',
+                    'Resume parsing and portfolio intelligence extraction powered by Groq LLM',
+                    'Interactive career path visualization utilizing D3.js dynamic graphs',
+                    'Generative AI job description designer from text prompts',
+                    'Scalable HR microservices built on Spring Boot & Angular'
+                ],
+                techStack: ['Spring Boot', 'Angular', 'Neo4j', 'Groq LLM', 'D3.js', 'Graph Databases', 'Semantic Search']
+            }
         },
         {
             title: 'DDI Relation Extraction (Medical NLP)',
