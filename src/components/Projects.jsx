@@ -74,7 +74,24 @@ const Projects = () => {
             tags: ['Azure', 'Docker', 'FastAPI', 'CI/CD'],
             metrics: ['91.34% Accuracy'],
             icon: 'fa-cloud',
-            github: 'https://github.com/YassirCher/ag-news-mlops-azure'
+            github: 'https://github.com/YassirCher/ag-news-mlops-azure',
+            coverImage: '/projects/ag-news-mlops/app.png',
+            galleryImages: [
+                {
+                    src: '/projects/ag-news-mlops/app.png',
+                    caption: 'AI News Classifier — Category Prediction with Confidence Scores'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    '91.34% accuracy with Linear SVM + TF-IDF',
+                    'Automated CI/CD via GitHub Actions',
+                    'Azure Container deployment ready',
+                    'FastAPI REST endpoint for real-time classification',
+                    '4-category news classification (World, Sports, Business, Sci/Tech)'
+                ],
+                techStack: ['Azure', 'Docker', 'FastAPI', 'CI/CD', 'Linear SVM', 'TF-IDF', 'GitHub Actions']
+            }
         },
         {
             title: 'Image Captioning Fine-tuning',
