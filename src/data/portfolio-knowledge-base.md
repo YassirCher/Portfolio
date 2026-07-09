@@ -143,7 +143,7 @@ Passionate AI Engineer specializing in designing and deploying end-to-end AI sys
 ## Education
 **Master of Excellence in Data Science & AI**
 *Université Moulay Ismail, Meknès (2024 – 2026)*
-Currently in S3. S1 & S2 Grade: Good.
+Currently in S4 (Seeking PFE). S1 & S2 Grade: Good (Bien) • S3 Grade: Good (Bien) Major.
 
 **Bachelor (Licence) in SMI (Science Math Info)**
 *Université Moulay Ismail, Meknès (2024)*
