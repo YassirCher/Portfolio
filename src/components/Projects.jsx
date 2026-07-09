@@ -108,7 +108,32 @@ const Projects = () => {
             metrics: ['99% Accuracy', 'Benchmark Record'],
             icon: 'fa-brain',
             github: 'https://github.com/YassirCher/alzheimer-mri-classification-xai-rag',
-            featured: true
+            featured: true,
+            coverImage: '/projects/alzheimer-mri/dashboard_home.png',
+            galleryImages: [
+                {
+                    src: '/projects/alzheimer-mri/dashboard_home.png',
+                    caption: 'Dashboard — Model Performance & Per-Class Metrics'
+                },
+                {
+                    src: '/projects/alzheimer-mri/prediction_interface.png',
+                    caption: 'Prediction Interface — MRI Upload, Grad-CAM & Attention Heatmap'
+                },
+                {
+                    src: '/projects/alzheimer-mri/chatbot_interface.png',
+                    caption: 'AI Assistant — Brain Imaging Expert Chatbot'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    '99.98% accuracy — broke official benchmarks',
+                    'Grad-CAM & Attention Heatmap for explainability',
+                    'RAG-powered AI Assistant for medical context',
+                    '4-class severity classification (44K MRI images)',
+                    'EfficientNet-B0 custom architecture'
+                ],
+                techStack: ['TensorFlow', 'EfficientNet-B0', 'Grad-CAM', 'RAG', 'Streamlit', 'XAI']
+            }
         },
         {
             title: 'Hate Speech Detection',
