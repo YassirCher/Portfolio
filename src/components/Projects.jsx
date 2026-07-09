@@ -245,7 +245,32 @@ const Projects = () => {
             metrics: ['Multi-Agent RAG', 'Production Ready'],
             icon: 'fa-brain',
             github: 'https://github.com/YassirCher/agentic-ai-research-assistant-azure',
-            featured: true
+            featured: true,
+            coverImage: '/projects/agentic-research-assistant/research_ai_main_page.png',
+            galleryImages: [
+                {
+                    src: '/projects/agentic-research-assistant/research_ai_main_page.png',
+                    caption: 'Main Dashboard — Agentic AI Research Assistant with Emerald Forest Theme'
+                },
+                {
+                    src: '/projects/agentic-research-assistant/question_uploaded_doc.png',
+                    caption: 'Q&A Chat — Asking Questions on Uploaded Documents and Resuming Sessions'
+                },
+                {
+                    src: '/projects/agentic-research-assistant/thought_process.png',
+                    caption: 'Agent Diagnostics — Thought Process and Agentic RAG Analysis'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'Production-ready multi-agent RAG system built on LangGraph & LangChain',
+                    'Session-isolated retrieval allowing secure multi-tenant usage',
+                    'Asynchronous document ingestion pipeline with citation-aware responses',
+                    'Interactive frontend in React highlighting the agent\'s diagnostic thought process',
+                    'Full-stack cloud-ready deployment with Docker support'
+                ],
+                techStack: ['LangGraph', 'LangChain', 'FastAPI', 'React', 'ChromaDB', 'Docker', 'Azure', 'RAG']
+            }
         },
         {
             title: 'Smart Job Matcher (Neo4j + AI)',
