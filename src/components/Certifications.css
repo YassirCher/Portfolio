@@ -26,16 +26,106 @@
     transform: translateX(8px);
 }
 
-.cert-icon {
+/* Single Logo Container */
+.cert-icon-single {
     width: 56px;
     height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    font-size: var(--font-size-2xl);
     flex-shrink: 0;
+    transition: all var(--transition-base);
+}
+
+.cert-icon-single svg,
+.cert-icon-single i {
+    width: 28px;
+    height: 28px;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-base);
+}
+
+.cert-card:hover .cert-icon-single {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.cert-card:hover .cert-icon-single svg,
+.cert-card:hover .cert-icon-single i {
+    transform: scale(1.1);
+}
+
+/* Split Logo Container */
+.logo-split {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all var(--transition-base);
+}
+
+.cert-card:hover .logo-split {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.logo-split-half {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-base);
+}
+
+/* Diagonal clip path dividing the square from top-right to bottom-left */
+.logo-split-left {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: rgba(42, 115, 204, 0.08); /* subtle Coursera brand tint */
+}
+
+.logo-split-right {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    background: rgba(255, 255, 255, 0.01);
+}
+
+/* Align and scale left logo to the top-left section */
+.logo-split-left svg {
+    width: 20px;
+    height: 20px;
+    transform: translate(-6px, -6px);
+}
+
+/* Align and scale right logo to the bottom-right section */
+.logo-split-right svg,
+.logo-split-right i {
+    width: 20px;
+    height: 20px;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(6px, 6px);
+}
+
+/* Micro-animations on hover */
+.cert-card:hover .logo-split-left svg {
+    transform: translate(-7px, -7px) scale(1.05);
+}
+
+.cert-card:hover .logo-split-right svg,
+.cert-card:hover .logo-split-right i {
+    transform: translate(7px, 7px) scale(1.05);
 }
 
 .cert-content {
