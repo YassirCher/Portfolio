@@ -386,8 +386,12 @@ const Projects = () => {
             metrics: ['90 Models', 'Interactive Dashboard'],
             icon: 'fa-user-check',
             github: 'https://github.com/YassirCher/dl-face-recognition-app',
-            coverImage: '/projects/dl-face-recognition/analysis_dashboard_1.png',
+            coverImage: '/projects/dl-face-recognition/mainpage.png',
             galleryImages: [
+                {
+                    src: '/projects/dl-face-recognition/mainpage.png',
+                    caption: 'DeepFaceRec — Live Stream Face Recognition & Confidence Distribution'
+                },
                 {
                     src: '/projects/dl-face-recognition/analysis_dashboard_1.png',
                     caption: 'Analysis Dashboard — Model Benchmarking Stats Part 1'
@@ -395,10 +399,6 @@ const Projects = () => {
                 {
                     src: '/projects/dl-face-recognition/analysis_dashboard_2.png',
                     caption: 'Analysis Dashboard — Performance Evaluation Analytics Part 2'
-                },
-                {
-                    src: '/projects/dl-face-recognition/inference_analysis.png',
-                    caption: 'Inference Analysis — Real-Time Face Recognition Inference Dashboard'
                 }
             ],
             detailInfo: {
