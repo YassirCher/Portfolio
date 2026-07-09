@@ -315,7 +315,40 @@ const Projects = () => {
             tags: ['BioBERT', 'BiLSTM', 'PyTorch', 'Flask', 'Medical NLP'],
             metrics: ['30+ Models', 'Research Project'],
             icon: 'fa-notes-medical',
-            github: 'https://github.com/YassirCher/DDI-Relation-Extraction-NLP'
+            github: 'https://github.com/YassirCher/DDI-Relation-Extraction-NLP',
+            coverImage: '/projects/ddi-relation-extraction/model_zoo_main_page.png',
+            galleryImages: [
+                {
+                    src: '/projects/ddi-relation-extraction/model_zoo_main_page.png',
+                    caption: 'Model Zoo — Dashboard of 30+ Trained Medical NLP Models'
+                },
+                {
+                    src: '/projects/ddi-relation-extraction/inference_page.png',
+                    caption: 'Inference Page — Drug-Drug Interaction Input Interface'
+                },
+                {
+                    src: '/projects/ddi-relation-extraction/inference_result.png',
+                    caption: 'Prediction Result — Identified Interactions & Confidence Metrics'
+                },
+                {
+                    src: '/projects/ddi-relation-extraction/model_comparison_page.png',
+                    caption: 'Model Comparison — Setup for Benchmarking Multiple Architectures'
+                },
+                {
+                    src: '/projects/ddi-relation-extraction/model_comparison_results.png',
+                    caption: 'Performance Results — Comparative Precision, Recall, & F1 Scores'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'Evaluated 30+ biomedical NLP model combinations for Drug-Drug Interaction extraction',
+                    'Leverages state-of-the-art BioBERT and deep BiLSTM neural network embeddings',
+                    'Interactive Flask dashboard for real-time inference and prediction output',
+                    'Robust comparison engine benchmarking precision, recall, and F1 metrics',
+                    'Streamlines medical information extraction and automated literature analysis'
+                ],
+                techStack: ['BioBERT', 'BiLSTM', 'PyTorch', 'Flask', 'Transformers', 'Spacy', 'Medical NLP']
+            }
         },
         {
             title: 'Video Violence Detection Web App',
