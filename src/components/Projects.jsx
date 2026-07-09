@@ -356,7 +356,28 @@ const Projects = () => {
             tags: ['FastAPI', 'React', 'VideoMAE', 'Computer Vision'],
             metrics: ['F1: 0.98', 'Video AI'],
             icon: 'fa-video',
-            github: 'https://github.com/YassirCher/Video-Violence-Detection-Web-App'
+            github: 'https://github.com/YassirCher/Video-Violence-Detection-Web-App',
+            coverImage: '/projects/video-violence-detection/main_page.png',
+            galleryImages: [
+                {
+                    src: '/projects/video-violence-detection/main_page.png',
+                    caption: 'Main Dashboard — Video Upload and Detection Setup'
+                },
+                {
+                    src: '/projects/video-violence-detection/result_page.png',
+                    caption: 'Result Page — Violence Detected with Frame-by-Frame Confidence Scores'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'End-to-end real-time violence detection web application',
+                    'FastAPI backend for high-throughput video processing and inference APIs',
+                    'Benchmarks state-of-the-art architectures including VideoMAE, CNN-LSTM, R(2+1)D, and YOLO+LSTM',
+                    'Achieves a benchmark F1-score of 0.98 on violence classification',
+                    'Interactive React frontend displays localized alerts and confidence charts'
+                ],
+                techStack: ['FastAPI', 'React', 'VideoMAE', 'CNN-LSTM', 'R(2+1)D', 'YOLO', 'PyTorch', 'Computer Vision']
+            }
         },
         {
             title: 'DL Face Recognition App',
