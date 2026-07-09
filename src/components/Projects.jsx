@@ -150,7 +150,32 @@ const Projects = () => {
             metrics: ['Medical AI'],
             icon: 'fa-user-md',
             github: 'https://github.com/YassirCher/NeuroDerm-AI',
-            featured: true
+            featured: true,
+            coverImage: '/projects/neuroderm-ai/home.png',
+            galleryImages: [
+                {
+                    src: '/projects/neuroderm-ai/home.png',
+                    caption: 'Home — Skin Lesion Classifier with Xception Model'
+                },
+                {
+                    src: '/projects/neuroderm-ai/gradcam.png',
+                    caption: 'Grad-CAM — Explainable AI Heatmap Visualization'
+                },
+                {
+                    src: '/projects/neuroderm-ai/result.png',
+                    caption: 'Prediction Result — Lesion Info, Risk Level & Confidence'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    '94.76% accuracy with Xception deep learning model',
+                    'Grad-CAM explainability for transparent AI decisions',
+                    'Real-time skin lesion classification',
+                    'Detailed lesion info: risk level, description, visual characteristics',
+                    'API-connected with session analytics'
+                ],
+                techStack: ['Xception', 'Grad-CAM', 'TensorFlow', 'Flask', 'Deep Learning', 'Medical AI']
+            }
         },
         {
             title: 'Realistic Text-to-Image',
