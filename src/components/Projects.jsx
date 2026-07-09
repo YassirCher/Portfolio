@@ -199,7 +199,36 @@ const Projects = () => {
             tags: ['Medical Imaging', 'XAI', 'Classification'],
             metrics: ['Kaggle'],
             icon: 'fa-microscope',
-            github: 'https://github.com/YassirCher/pathmnist-xai-classification'
+            github: 'https://github.com/YassirCher/pathmnist-xai-classification',
+            coverImage: '/projects/pathmnist-xai/main.png',
+            galleryImages: [
+                {
+                    src: '/projects/pathmnist-xai/main.png',
+                    caption: 'Main Dashboard — PathMNIST Pathology Image Classifier'
+                },
+                {
+                    src: '/projects/pathmnist-xai/prediction.png',
+                    caption: 'Prediction View — Input Image & Tissue Classification'
+                },
+                {
+                    src: '/projects/pathmnist-xai/grad-cam.png',
+                    caption: 'Grad-CAM View — Visual Explanation of Model Decisions'
+                },
+                {
+                    src: '/projects/pathmnist-xai/model stats.png',
+                    caption: 'Model Stats — Training Progress and Validation Performance'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'Classifies pathology slides from MedMNIST (PathMNIST dataset)',
+                    'Deep convolutional neural network trained on histological tissues',
+                    'Integrated Grad-CAM visualization for diagnostic explainability (XAI)',
+                    'Interactive dashboard displaying training analytics and model performance metrics',
+                    'Kaggle medical imaging challenge integration'
+                ],
+                techStack: ['PyTorch', 'Grad-CAM', 'XAI', 'CNN', 'Streamlit', 'Medical Imaging']
+            }
         },
         {
             title: 'SDMW-MCP',
