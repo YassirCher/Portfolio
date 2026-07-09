@@ -236,7 +236,8 @@ const Projects = () => {
             tags: ['MCP', 'AI Systems', 'Integration'],
             metrics: ['MCP Protocol'],
             icon: 'fa-cogs',
-            github: 'https://github.com/YassirCher/SDMW-MCP'
+            github: 'https://github.com/YassirCher/SDMW-MCP',
+            isPrivate: true
         },
         {
             title: 'Agentic AI Research Assistant (Azure)',
