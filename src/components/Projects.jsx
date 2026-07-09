@@ -385,7 +385,32 @@ const Projects = () => {
             tags: ['Face Recognition', 'Deep Learning', 'Model Benchmarking'],
             metrics: ['90 Models', 'Interactive Dashboard'],
             icon: 'fa-user-check',
-            github: 'https://github.com/YassirCher/dl-face-recognition-app'
+            github: 'https://github.com/YassirCher/dl-face-recognition-app',
+            coverImage: '/projects/dl-face-recognition/analysis_dashboard_1.png',
+            galleryImages: [
+                {
+                    src: '/projects/dl-face-recognition/analysis_dashboard_1.png',
+                    caption: 'Analysis Dashboard — Model Benchmarking Stats Part 1'
+                },
+                {
+                    src: '/projects/dl-face-recognition/analysis_dashboard_2.png',
+                    caption: 'Analysis Dashboard — Performance Evaluation Analytics Part 2'
+                },
+                {
+                    src: '/projects/dl-face-recognition/inference_analysis.png',
+                    caption: 'Inference Analysis — Real-Time Face Recognition Inference Dashboard'
+                }
+            ],
+            detailInfo: {
+                highlights: [
+                    'Benchmarked 90 face recognition model combinations (detectors, embedders, distance metrics)',
+                    'Interactive inference application with real-time recognition pipeline',
+                    'Detailed statistical analysis dashboard displaying comparative performance metrics',
+                    'Supports state-of-the-art architectures (FaceNet, ArcFace, DeepFace, etc.)',
+                    'Comprehensive validation on standard benchmarks (LFW, custom datasets)'
+                ],
+                techStack: ['DeepFace', 'TensorFlow', 'PyTorch', 'OpenCV', 'Streamlit', 'Scikit-learn', 'Model Benchmarking']
+            }
         }
     ]
 
