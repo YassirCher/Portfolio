@@ -29,6 +29,11 @@
     box-shadow: 0 10px 30px rgba(6, 182, 212, 0.15), var(--shadow-lg);
 }
 
+.project-card.has-gallery:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 4px;
+}
+
 .project-card.featured {
     border-color: rgba(99, 102, 241, 0.3);
 }
@@ -49,6 +54,140 @@
     object-fit: cover;
     object-position: top center;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-brand-cover {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 13px 18px 16px;
+    overflow: hidden;
+}
+
+.brand-cover-eyebrow {
+    display: block;
+    margin-bottom: 10px;
+    color: #c4cae8;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.qasper-brand-cover {
+    background: radial-gradient(circle at 10% 0%, rgba(50, 107, 184, 0.25), transparent 50%),
+        linear-gradient(125deg, #101728, #1a1830 60%, #0e1a27);
+}
+
+.model-brand-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    height: calc(100% - 26px);
+}
+
+.model-brand {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #fff;
+}
+
+.model-brand:nth-child(n + 4) {
+    grid-column: span 3;
+}
+
+.model-brand img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.model-brand strong {
+    font-size: 0.75rem;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.model-brand.deepseek { background: #0e3155; }
+.model-brand.qwen { background: #2d214b; }
+.model-brand.mistral { background: #30201e; }
+.model-brand.llama { background: #eaf3ff; }
+.model-brand.phi { background: #edf0f4; color: #1a2334; }
+
+.model-brand.llama img {
+    width: min(150px, 86%);
+    height: 38px;
+}
+
+.biomedical-brand-cover {
+    background: radial-gradient(circle at 85% 85%, rgba(21, 149, 113, 0.23), transparent 45%),
+        linear-gradient(125deg, #101a32, #181a34 55%, #102b2d);
+}
+
+.biomedical-brand-comparison {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 8px;
+    height: calc(100% - 26px);
+}
+
+.qlora-method-mark,
+.unsloth-brand-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid rgba(134, 151, 245, 0.33);
+    border-radius: 13px;
+    background: rgba(32, 40, 76, 0.78);
+}
+
+.qlora-method-mark strong {
+    color: #f3f4ff;
+    font-size: clamp(1.15rem, 2vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.qlora-method-mark span {
+    margin-top: 4px;
+    color: #aeb9db;
+    font-size: 0.62rem;
+    text-align: center;
+}
+
+.unsloth-brand-mark {
+    border-color: rgba(69, 205, 162, 0.36);
+    background: rgba(16, 58, 52, 0.65);
+}
+
+.unsloth-brand-mark img {
+    display: block;
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+    object-fit: contain;
+}
+
+.biomedical-versus {
+    align-self: center;
+    color: #c7cfdf;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .project-card:hover .project-cover-img {
@@ -92,6 +231,22 @@
 
 .project-card:hover .project-overlay {
     opacity: 1;
+}
+
+.project-card.has-gallery:focus-visible .project-overlay {
+    opacity: 1;
+}
+
+.project-status {
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    border-radius: var(--radius-full);
+    background: rgba(251, 191, 36, 0.1);
+    color: #fcd34d;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
 }
 
 .project-links {
@@ -320,6 +475,30 @@
 }
 
 /* Main image viewer */
+.modal-image-zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+}
+
+.modal-image-zoom:focus-visible,
+.modal-widget button:focus-visible,
+.modal-widget a:focus-visible,
+.lightbox-overlay button:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+}
+
+.modal-close span,
+.lightbox-close span,
+.modal-nav span {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
 .modal-viewer {
     position: relative;
     width: 100%;
@@ -339,12 +518,8 @@
 }
 
 .modal-image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 28px 20px 12px;
-    background: linear-gradient(to top, rgba(8, 8, 12, 0.95), transparent);
+    padding: 10px 20px 12px;
+    background: #08080c;
     font-size: 0.8rem;
     color: var(--color-text-muted);
     font-weight: 500;
@@ -357,8 +532,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,6 +6,7 @@ const Navbar = ({ scrolled }) => {
 
     const navLinks = [
         { href: '#about', label: 'About' },
+        { href: '#thinkgraph', label: 'ThinkGraph AI' },
         { href: '#skills', label: 'Skills' },
         { href: '#projects', label: 'Projects' },
         { href: '#certifications', label: 'Certifications' },
@@ -46,10 +47,12 @@ const Navbar = ({ scrolled }) => {
                     className={`nav-toggle ${menuOpen ? 'active' : ''}`}
                     onClick={() => setMenuOpen(!menuOpen)}
                     aria-label="Toggle navigation"
+                    aria-expanded={menuOpen}
+                    aria-controls="primary-navigation"
                 >
                     <span className="hamburger"></span>
                 </button>
-                <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
+                <ul id="primary-navigation" className={`nav-menu ${menuOpen ? 'active' : ''}`}>
                     {navLinks.map(link => (
                         <li key={link.href}>
                             <a

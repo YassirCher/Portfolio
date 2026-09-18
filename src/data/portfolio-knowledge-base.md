@@ -3,13 +3,15 @@
 ## Profile Overview
 **Name:** Yassir Chergui
 **Title:** Data Science & AI Engineer
-**Focus:** Computer Vision, Generative AI, MLOps
-**Status:** Master's student in Data Science & AI at Université Moulay Ismail, Meknès. Currently working on final year project (PFE). Available for Internship.
+**Focus:** LLMs, multimodal LightRAG, multi-agent systems, Data Science, MLOps, and Computer Vision
+**Status:** Graduated in 2026 with a Master of Excellence in Data Science and Artificial Intelligence from Université Moulay Ismail, Faculty of Science Meknès. Degree awarded with mention Très Bien.
+**Availability:** Available immediately for AI/ML engineering or Data Science roles, or a pre-employment internship.
 **Location:** Meknès, Morocco
-**Contact:** cherguiyassir1@gmail.com | +212 693 534 651
+**Contact:** Use the portfolio's Contact section.
+**CV:** French CV available from the portfolio's Download CV (FR) button.
 
 ## Professional Summary
-Passionate AI Engineer specializing in designing and deploying end-to-end AI systems. Expertise spans from fine-tuning large language models (Mistral 7B) to building real-time computer vision pipelines (YOLOv8) and production-ready MLOps workflows. Dedicated to creating AI solutions for real-world problems in security, e-commerce, and healthcare.
+Yassir is an AI engineer and 2026 Master's graduate who builds end-to-end AI systems. His work spans LLM fine-tuning, multimodal LightRAG, LangGraph agent orchestration, hybrid graph and vector search, real-time computer vision, and production MLOps. His end-of-studies project, ThinkGraph AI, is a scientific research platform.
 
 ---
 
@@ -32,9 +34,42 @@ Passionate AI Engineer specializing in designing and deploying end-to-end AI sys
 - LLM Fine-tuning (PEFT/LoRA)
 - Agentic AI systems
 
+### Soft Skills
+- Autonomous ownership: Yassir independently drives work from problem definition through delivery.
+- Results driven and optimization focused: he aims for the best practical result, evaluates outcomes, and improves quality and efficiency.
+- Critical thinking, team collaboration, and technical communication.
+
 ---
 
 ## Featured Projects
+
+### ThinkGraph AI — 2026 End-of-Studies Project
+**Source:** Private repository; code access is available on request through the portfolio's ThinkGraph section.
+**Period:** 1 April to 8 September 2026. Completed PFE project.
+**Overview:** Multimodal, multi-agent scientific research platform. It parses PDF text, figures, tables, formulas, and references into searchable evidence.
+**Multimodal LightRAG:** Vision analysis converts figure knowledge into structured text before LightRAG extracts concepts and relationships. Neo4j stores graph knowledge, Qdrant stores vector evidence, and BGE-M3 generates embeddings. Hybrid retrieval combines semantic, graph, and keyword search.
+**12 specialized agents and subagents:** Orchestrator routes work. Knowledge extraction, multimodal vision, table understanding, and formula understanding turn papers into structured evidence. Prompt refinement, graph memory, retrieval, and validation help answer research questions against sources. Report synthesis, presentation, and quiz generation create grounded outputs. The quiz agent is a separate page-grounded workflow; the table and formula understanding subagents are part of knowledge extraction.
+**Stack:** Python, PyTorch, Hugging Face, LangGraph, LightRAG, FastAPI, Next.js, Neo4j, Qdrant, PostgreSQL, Redis, Docker, Azure.
+**Media:** The portfolio includes a 12-second ThinkGraph AI introduction plus screenshots of multimodal paper extraction, an evidence-backed quiz, and the presentation studio.
+
+### EcoForecaster — Energy Forecasting and MLOps
+**Source:** https://github.com/YassirCher/Energy-Consumption-AI-Forecaster
+**Overview:** Energy forecasting platform with 1-minute, 1-hour, and 24-hour predictions, SHAP explainability, drift detection, and specialist MLOps agents. Graph RAG helps ground AI-generated operational insights. Built with FastAPI, React, Docker, and Azure Container Apps.
+**Gallery:** Real-time prediction chart, specialist-agent observability, drift intelligence, and SHAP feature explanations.
+
+### Scientific QA LLM Fine-Tuning
+**Source:** https://github.com/YassirCher/scientific-qa-llm-finetuning
+**Overview:** Fine-tuned and evaluated 13 open language models on the QASPER scientific question-answering dataset using consistent preparation and evaluation workflows with QLoRA or LoRA. Phi-4-mini achieved the best controlled BERTScore F1 of 79.86% on 256 examples, as reported in Yassir's CV.
+**Gallery:** Evaluation chart comparing validation perplexity and test BERTScore F1, training-hours comparison, and model training configurations. The card cover features DeepSeek, Qwen, Mistral, Llama, and Microsoft Phi model families.
+
+### ReviewLens AI — Currently under build
+**Source:** https://github.com/YassirCher/reviewlens-ai
+**Status:** Currently under build. The V2 research experience is still in development.
+**Overview:** The project analyzes YouTube product reviews and transcripts to produce evidence-backed buying reports, with source-level findings and an interactive evidence map.
+
+### Biomedical LLM Fine-Tuning Benchmarks
+**Source:** https://github.com/YassirCher/biomedical-llm-optimization
+**Overview:** Compared standard QLoRA with Unsloth QLoRA while fine-tuning Qwen 2.5-7B on PubMedQA. Unsloth achieved a 1.28× speedup and 21.66% shorter training time while maintaining comparable 79% accuracy and 0.57 Macro F1.
 
 ### 1. AI E-commerce Agent (In Progress)
 **Description:** Finalizing an AI-powered e-commerce platform featuring a fine-tuned Mistral 7B Agentic AI and recommendation system.
@@ -143,11 +178,11 @@ Passionate AI Engineer specializing in designing and deploying end-to-end AI sys
 ## Education
 **Master of Excellence in Data Science & AI**
 *Université Moulay Ismail, Meknès (2024 – 2026)*
-Currently in S4. S1 & S2 Grade: Good (Bien) • S3 Grade: Good (Bien) Major.
+Degree awarded in 2026 with mention Très Bien.
 
 **Bachelor (Licence) in SMI (Science Math Info)**
 *Université Moulay Ismail, Meknès (2024)*
-Honors: Assez Bien (S6: Très Bien).
+Mention Assez Bien.
 
 ## Certifications
 - AWS Generative AI Applications

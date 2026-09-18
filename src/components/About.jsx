@@ -18,8 +18,8 @@ const About = () => {
                 <div className="about-content">
                     <div className="about-text">
                         <p className="about-intro">
-                            I'm a <strong>Master's student in Data Science & AI</strong> at Université Moulay Ismail, Faculty of Science Meknes,
-                            with hands-on experience building production-ready AI systems and research-driven deep learning models.
+                            I'm a <strong>2026 Master of Excellence graduate in Data Science &amp; AI</strong> from Université Moulay Ismail, Faculty of Science Meknès, awarded <strong>mention Très Bien</strong>.
+                            I build production-ready AI systems and research-driven deep learning models.
                         </p>
                         <p>
                             My expertise spans from fine-tuning large language models including <strong>DeepSeek, Qwen, Phi, Gemma, Mistral & Llama</strong> to developing

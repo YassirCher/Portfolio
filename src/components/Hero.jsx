@@ -77,11 +77,11 @@ const Hero = () => {
             </div>
             <div className="hero-content">
                 <div className="hero-profile reveal">
-                    <img src="/image.jpg" alt="Yassir Chergui" className="profile-image" />
+                    <img src="/image.jpg" alt="Portrait of Yassir Chergui" className="profile-image" fetchPriority="high" />
                 </div>
                 <div className="hero-badge reveal">
                     <span className="badge-dot"></span>
-                    <span>Available for Internship</span>
+                    <span>Available for AI/ML &amp; Data Science roles</span>
                 </div>
                 <div className="hero-title reveal">
                     <span className="greeting">Hello, I'm</span>
@@ -89,17 +89,18 @@ const Hero = () => {
                     <span className="title-gradient" ref={titleElement}>Data Science & AI Engineer</span>
                 </div>
                 <p className="hero-description animate-fade-in-up">
-                    Master's student specializing in <strong>Computer Vision</strong>, <strong>Medical AI</strong>, <strong>Generative AI</strong>, and <strong>NLP</strong>.
-                    Currently working on my final year project (PFE) while designing production-grade AI systems including multi-agent RAG pipelines, real-time detection models, and cloud-deployed MLOps workflows.
+                    2026 Master of Excellence graduate in Data Science &amp; AI, awarded <strong>mention Très Bien</strong>.
+                    I build end-to-end AI systems across <strong>LLMs, multimodal RAG, multi-agent workflows</strong>, computer vision, and MLOps.
+                    I am available immediately for AI/ML engineering or Data Science roles, as well as pre-employment internships.
                 </p>
                 <div className="hero-cta animate-fade-in-up">
                     <a href="#contact" className="btn btn-primary">
                         <i className="fas fa-paper-plane"></i>
                         Get in Touch
                     </a>
-                    <a href="/resume_CHERGUI_Yassir.pdf" download className="btn btn-secondary">
+                    <a href="/Yassir_Chergui_CV_FR.pdf" download="Yassir_Chergui_CV_FR.pdf" className="btn btn-secondary">
                         <i className="fas fa-download"></i>
-                        Download CV
+                        Download CV (FR)
                     </a>
                     <a href="#projects" className="btn btn-secondary">
                         <i className="fas fa-briefcase"></i>

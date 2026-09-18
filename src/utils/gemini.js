@@ -1,8 +1,5 @@
-import knowledgeBaseEmbeddings from '../data/knowledge_base_embeddings.json';
-
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
-const EMBEDDING_MODEL = 'gemini-embedding-001';
 const GEMINI_CHAT_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash'];
 const GROQ_CHAT_MODELS = ['qwen/qwen3.6-27b'];
 const GROQ_MAX_TOKENS = 800;
@@ -10,11 +7,29 @@ const GROQ_CONTEXT_CHAR_LIMIT = 12000;
 
 // --- Helper Functions ---
 
-const cosineSimilarity = (vecA, vecB) => {
-    const dotProduct = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
-    const magnitudeA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
-    const magnitudeB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
-    return dotProduct / (magnitudeA * magnitudeB);
+const STOP_WORDS = new Set([
+    'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'his',
+    'in', 'into', 'is', 'it', 'of', 'on', 'or', 'our', 'the', 'their', 'this', 'to',
+    'was', 'were', 'with', 'you', 'your', 'de', 'des', 'du', 'et', 'la', 'le', 'les'
+]);
+
+const tokenize = (text) => text
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .match(/[a-z0-9]{2,}/g)
+    ?.filter(term => !STOP_WORDS.has(term)) || [];
+
+const queryEmbedding = (query, idf) => {
+    const counts = {};
+    tokenize(query).forEach(term => { counts[term] = (counts[term] || 0) + 1; });
+    const weights = {};
+    Object.entries(counts).forEach(([term, count]) => {
+        if (idf[term]) weights[term] = (1 + Math.log(count)) * idf[term];
+    });
+    const magnitude = Math.sqrt(Object.values(weights).reduce((sum, weight) => sum + weight * weight, 0)) || 1;
+    Object.keys(weights).forEach(term => { weights[term] /= magnitude; });
+    return weights;
 };
 
 const fetchWithRetry = async (
@@ -77,50 +92,26 @@ const fetchWithRetry = async (
 };
 
 
-const getEmbedding = async (text) => {
-    if (!GEMINI_API_KEY) {
-        throw new Error('Missing VITE_GEMINI_API_KEY for embedding retrieval');
-    }
-
-    // API endpoint for embedding
-    const response = await fetchWithRetry(
-        `https://generativelanguage.googleapis.com/v1beta/models/${EMBEDDING_MODEL}:embedContent?key=${GEMINI_API_KEY}`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: `models/${EMBEDDING_MODEL}`,
-                content: { parts: [{ text }] }
-            })
-        },
-        {
-            retries: 2,
-            baseBackoff: 1000,
-            timeoutMs: 15000
-        }
-    );
-
-    const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
-    return data.embedding.values;
-};
-
 const retrieveContext = async (query) => {
     try {
-        const queryEmbedding = await getEmbedding(query);
+        const { default: knowledgeBaseEmbeddings } = await import('../data/knowledge_base_embeddings.json');
+        const queryVector = queryEmbedding(query, knowledgeBaseEmbeddings.idf);
 
-        // Calculate similarity for all chunks
-        const scoredChunks = knowledgeBaseEmbeddings.map(chunk => ({
+        const scoredChunks = knowledgeBaseEmbeddings.chunks.map(chunk => ({
             text: chunk.text,
-            score: cosineSimilarity(queryEmbedding, chunk.embedding)
+            score: Object.entries(queryVector).reduce(
+                (sum, [term, weight]) => sum + weight * (chunk.embedding[term] || 0), 0
+            )
         }));
 
-        // Sort by score descending and take top 10 for broad CV/project questions
         scoredChunks.sort((a, b) => b.score - a.score);
-        return scoredChunks.slice(0, 10).map(c => c.text).join('\n\n');
+        const matches = scoredChunks.filter(chunk => chunk.score > 0).slice(0, 10);
+        return (matches.length ? matches : scoredChunks.slice(0, 8))
+            .map(chunk => chunk.text)
+            .join('\n\n');
     } catch (error) {
         console.error("Error retrieving context:", error);
-        return ""; // Fallback to no context if embedding fails
+        return "";
     }
 };
 

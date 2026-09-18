@@ -1,12 +1,66 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import ProjectBrandCovers from './ProjectBrandCovers'
 import './Projects.css'
 
 const Projects = () => {
     const [activeModal, setActiveModal] = useState(null)
     const [lightboxImage, setLightboxImage] = useState(null)
     const [activeThumb, setActiveThumb] = useState(0)
+    const modalCloseRef = useRef(null)
+    const lightboxCloseRef = useRef(null)
+    const lastTriggerRef = useRef(null)
 
     const projects = [
+        {
+            title: 'EcoForecaster',
+            description: 'Energy forecasting and MLOps observability platform with multi-horizon predictions, drift monitoring, SHAP explanations, and specialist agents grounded in a Graph RAG knowledge graph.',
+            tags: ['Time Series', 'MLOps', 'Graph RAG', 'FastAPI', 'React', 'Azure'],
+            metrics: ['1m / 1h / 24h Forecasts', 'Multi-Agent Insights'],
+            icon: 'fa-bolt',
+            github: 'https://github.com/YassirCher/Energy-Consumption-AI-Forecaster',
+            featured: true,
+            coverImage: '/projects/ecoforecaster/predictions.png',
+            coverAlt: 'EcoForecaster live energy prediction chart with confidence interval',
+            galleryImages: [
+                { src: '/projects/ecoforecaster/predictions.png', caption: 'Real-time energy forecasts with confidence intervals' },
+                { src: '/projects/ecoforecaster/agents.png', caption: 'Observability for five specialist AI agents' },
+                { src: '/projects/ecoforecaster/drift.png', caption: 'Distribution drift monitoring and alert thresholds' },
+                { src: '/projects/ecoforecaster/shap.png', caption: 'SHAP explanations for forecast drivers' }
+            ],
+            detailInfo: {
+                highlights: ['Multi-horizon energy consumption forecasts', 'Specialist AI agents with run observability', 'Drift intelligence and SHAP model explanations'],
+                techStack: ['Time Series', 'MLOps', 'Graph RAG', 'FastAPI', 'React', 'Azure']
+            }
+        },
+        {
+            title: 'Scientific QA LLM Fine-Tuning',
+            description: 'Fine-tuned and evaluated 13 open language models on QASPER scientific question answering, using a consistent data preparation and evaluation workflow with QLoRA and LoRA.',
+            tags: ['QASPER', 'QLoRA', 'Hugging Face', 'PyTorch', 'LLM Evaluation'],
+            metrics: ['13 Open Models', 'Scientific QA'],
+            icon: 'fa-flask',
+            github: 'https://github.com/YassirCher/scientific-qa-llm-finetuning',
+            coverKind: 'qasper',
+            galleryImages: [
+                { src: '/projects/qasper/evaluation.png', caption: 'Validation perplexity and test BERTScore F1 across 13 models' },
+                { src: '/projects/qasper/training-hours.png', caption: 'Training hours for each fine-tuned model' },
+                { src: '/projects/qasper/configurations.png', caption: 'Model training configurations and hyperparameters' }
+            ],
+            detailInfo: {
+                highlights: ['13 open language models evaluated on QASPER', 'Consistent QLoRA and LoRA training workflow', 'Perplexity, BERTScore, and training-time comparisons'],
+                techStack: ['QASPER', 'QLoRA', 'Hugging Face', 'PyTorch', 'LLM Evaluation']
+            }
+        },
+        {
+            title: 'ReviewLens AI',
+            status: 'Currently under build',
+            description: 'An in-progress platform that analyzes YouTube product reviews and transcripts to create evidence-backed buying reports, with source-level findings and an interactive evidence map.',
+            tags: ['Next.js', 'FastAPI', 'Multi-Agent AI', 'YouTube', 'Evidence Maps'],
+            metrics: ['V2 In Development', 'Evidence-Backed Reports'],
+            icon: 'fa-search',
+            github: 'https://github.com/YassirCher/reviewlens-ai',
+            coverImage: '/projects/reviewlens/cover.svg',
+            coverAlt: 'ReviewLens AI connects video reviews to an evidence map; project under build'
+        },
         {
             title: 'AI E-commerce Agent',
             description: 'Finalizing an AI-powered e-commerce platform featuring a fine-tuned Mistral 7B Agentic AI and recommendation system. Uses HateBERT for hate speech detection. Developed with Spring Boot, Angular, and Tailwind CSS.',
@@ -24,7 +78,8 @@ const Projects = () => {
             metrics: ['1.28× Speedup', '79% Accuracy', '21.66% Faster'],
             icon: 'fa-flask',
             github: 'https://github.com/YassirCher/biomedical-llm-optimization',
-            featured: true
+            featured: true,
+            coverKind: 'biomedical'
         },
         {
             title: 'Urban Security – Weapon Detection',
@@ -415,6 +470,13 @@ const Projects = () => {
         }
     ]
 
+    function closeModal() {
+        setActiveModal(null)
+        setLightboxImage(null)
+        setActiveThumb(0)
+        requestAnimationFrame(() => lastTriggerRef.current?.focus())
+    }
+
     // Lock body scroll when modal is open
     useEffect(() => {
         if (activeModal !== null) {
@@ -425,33 +487,53 @@ const Projects = () => {
         return () => { document.body.style.overflow = '' }
     }, [activeModal])
 
-    // Close on Escape
+    useEffect(() => {
+        if (lightboxImage) lightboxCloseRef.current?.focus()
+        else if (activeModal) modalCloseRef.current?.focus()
+    }, [activeModal, lightboxImage])
+
+    // Keep keyboard interaction inside the active gallery layer.
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') {
                 if (lightboxImage) setLightboxImage(null)
                 else if (activeModal !== null) closeModal()
             }
+            if (e.key === 'Tab' && activeModal !== null) {
+                const layer = document.querySelector(lightboxImage ? '.lightbox-overlay' : '.modal-widget')
+                const focusable = [...(layer?.querySelectorAll('button, a[href]') || [])]
+                    .filter((element) => !element.disabled)
+                if (!focusable.length) return
+                const first = focusable[0]
+                const last = focusable[focusable.length - 1]
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault()
+                    last.focus()
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault()
+                    first.focus()
+                }
+            }
         }
         window.addEventListener('keydown', handleKey)
         return () => window.removeEventListener('keydown', handleKey)
     }, [lightboxImage, activeModal])
 
-    const openModal = (project) => {
+    const openModal = (project, trigger) => {
+        lastTriggerRef.current = trigger
         setActiveModal(project)
-        setActiveThumb(0)
-    }
-
-    const closeModal = () => {
-        setActiveModal(null)
-        setLightboxImage(null)
         setActiveThumb(0)
     }
 
     const handleCardClick = (e, project) => {
         if (!project.galleryImages) return
+        openModal(project, e.currentTarget)
+    }
+
+    const handleCardKeyDown = (e, project) => {
+        if (!project.galleryImages || !['Enter', ' '].includes(e.key)) return
         e.preventDefault()
-        openModal(project)
+        openModal(project, e.currentTarget)
     }
 
     return (
@@ -467,7 +549,11 @@ const Projects = () => {
                         <article
                             className={`project-card ${project.featured ? 'featured' : ''} ${project.galleryImages ? 'has-gallery' : ''}`}
                             key={index}
+                            role={project.galleryImages ? 'button' : undefined}
+                            tabIndex={project.galleryImages ? 0 : undefined}
+                            aria-label={project.galleryImages ? `View ${project.title} image gallery` : undefined}
                             onClick={(e) => handleCardClick(e, project)}
+                            onKeyDown={(e) => handleCardKeyDown(e, project)}
                         >
                             <div className="project-image">
                                 {project.isPrivate && (
@@ -475,11 +561,14 @@ const Projects = () => {
                                         <i className="fas fa-lock" style={{ marginRight: '4px' }}></i> Private
                                     </div>
                                 )}
-                                {project.coverImage ? (
+                                {project.coverKind ? (
+                                    <ProjectBrandCovers kind={project.coverKind} />
+                                ) : project.coverImage ? (
                                     <img
                                         src={project.coverImage}
-                                        alt={project.title}
+                                        alt={project.coverAlt || `${project.title} project preview`}
                                         className="project-cover-img"
+                                        loading="lazy"
                                     />
                                 ) : (
                                     <div className="project-icon">
@@ -496,7 +585,7 @@ const Projects = () => {
                                     <div className="project-links">
                                         {project.galleryImages ? (
                                             <span className="project-link view-project" title="View Project Details">
-                                                <i className="fas fa-expand-alt"></i>
+                                                <span aria-hidden="true">⤢</span>
                                             </span>
                                         ) : project.github && !project.isPrivate ? (
                                             <a
@@ -530,6 +619,7 @@ const Projects = () => {
                                         <span>{project.title}</span>
                                     )}
                                 </h3>
+                                {project.status && <span className="project-status">{project.status}</span>}
                                 <p className="project-description">{project.description}</p>
                                 <div className="project-metrics">
                                     {project.metrics.map((metric, i) => (
@@ -546,20 +636,26 @@ const Projects = () => {
                 {/* ========== PROJECT MODAL WIDGET ========== */}
                 {activeModal && activeModal.galleryImages && (
                     <div className="modal-backdrop" onClick={closeModal}>
-                        <div className="modal-widget" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-widget" role="dialog" aria-modal="true" aria-hidden={Boolean(lightboxImage)} aria-label={`${activeModal.title} image gallery`} onClick={(e) => e.stopPropagation()}>
                             {/* Close button */}
-                            <button className="modal-close" onClick={closeModal} aria-label="Close">
-                                <i className="fas fa-times"></i>
+                            <button ref={modalCloseRef} className="modal-close" onClick={closeModal} aria-label="Close project gallery">
+                                <span aria-hidden="true">×</span>
                             </button>
 
                             {/* Main image viewer */}
                             <div className="modal-viewer">
-                                <img
-                                    src={activeModal.galleryImages[activeThumb].src}
-                                    alt={activeModal.galleryImages[activeThumb].caption}
-                                    className="modal-main-image"
+                                <button
+                                    type="button"
+                                    className="modal-image-zoom"
                                     onClick={() => setLightboxImage(activeModal.galleryImages[activeThumb])}
-                                />
+                                    aria-label={`Enlarge ${activeModal.galleryImages[activeThumb].caption}`}
+                                >
+                                    <img
+                                        src={activeModal.galleryImages[activeThumb].src}
+                                        alt={activeModal.galleryImages[activeThumb].caption}
+                                        className="modal-main-image"
+                                    />
+                                </button>
                                 <div className="modal-image-caption">
                                     {activeModal.galleryImages[activeThumb].caption}
                                 </div>
@@ -569,16 +665,16 @@ const Projects = () => {
                                         <button
                                             className="modal-nav modal-nav-prev"
                                             onClick={() => setActiveThumb((activeThumb - 1 + activeModal.galleryImages.length) % activeModal.galleryImages.length)}
-                                            aria-label="Previous"
+                                            aria-label="Previous project screenshot"
                                         >
-                                            <i className="fas fa-chevron-left"></i>
+                                            <span aria-hidden="true">‹</span>
                                         </button>
                                         <button
                                             className="modal-nav modal-nav-next"
                                             onClick={() => setActiveThumb((activeThumb + 1) % activeModal.galleryImages.length)}
-                                            aria-label="Next"
+                                            aria-label="Next project screenshot"
                                         >
-                                            <i className="fas fa-chevron-right"></i>
+                                            <span aria-hidden="true">›</span>
                                         </button>
                                     </>
                                 )}
@@ -591,8 +687,10 @@ const Projects = () => {
                                         key={i}
                                         className={`modal-thumb ${activeThumb === i ? 'active' : ''}`}
                                         onClick={() => setActiveThumb(i)}
+                                        aria-label={`Show ${img.caption}`}
+                                        aria-current={activeThumb === i ? 'true' : undefined}
                                     >
-                                        <img src={img.src} alt={img.caption} />
+                                        <img src={img.src} alt="" loading="lazy" />
                                     </button>
                                 ))}
                             </div>
@@ -653,9 +751,9 @@ const Projects = () => {
 
                 {/* ========== FULLSCREEN LIGHTBOX ========== */}
                 {lightboxImage && (
-                    <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
-                        <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
-                            <i className="fas fa-times"></i>
+                    <div className="lightbox-overlay" role="dialog" aria-modal="true" aria-label={lightboxImage.caption} onClick={() => setLightboxImage(null)}>
+                        <button ref={lightboxCloseRef} className="lightbox-close" onClick={() => setLightboxImage(null)} aria-label="Close enlarged image">
+                            <span aria-hidden="true">×</span>
                         </button>
                         <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
                             <img src={lightboxImage.src} alt={lightboxImage.caption} />

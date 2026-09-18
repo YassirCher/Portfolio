@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Quote from './components/Quote'
 import About from './components/About'
+import ThinkGraph from './components/ThinkGraph'
 import ChatWidget from './components/ChatWidget'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -83,6 +84,7 @@ function App() {
           <Hero />
           <Quote />
           <About />
+          <ThinkGraph />
           <Skills />
           <Learning />
           <Projects />

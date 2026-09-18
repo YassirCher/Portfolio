@@ -46,7 +46,8 @@ const Skills = () => {
 
     const softSkills = [
         { icon: 'fa-lightbulb', label: 'Critical Thinking & Problem Solving' },
-        { icon: 'fa-rocket', label: 'Results-Driven Execution' },
+        { icon: 'fa-compass', label: 'Autonomous Ownership' },
+        { icon: 'fa-rocket', label: 'Results Driven & Optimization Focused' },
         { icon: 'fa-users', label: 'Team Collaboration' },
         { icon: 'fa-comments', label: 'Technical Communication' }
     ]

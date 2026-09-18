@@ -1,0 +1,455 @@
+.thinkgraph {
+    background: linear-gradient(180deg, rgba(19, 19, 26, 0.97), rgba(10, 10, 15, 0.97));
+}
+
+.thinkgraph-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.thinkgraph-media {
+    min-width: 0;
+    padding: var(--spacing-sm);
+    border: 1px solid rgba(129, 140, 248, 0.36);
+    border-radius: var(--radius-xl);
+    background: rgba(19, 19, 26, 0.9);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35), 0 0 48px rgba(99, 102, 241, 0.1);
+}
+
+.thinkgraph-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2558 / 1346;
+    border-radius: var(--radius-lg);
+    background: #0a0a0f;
+    object-fit: contain;
+}
+
+.thinkgraph-media figcaption {
+    padding: var(--spacing-sm) var(--spacing-xs) 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+}
+
+.thinkgraph-story {
+    min-width: 0;
+}
+
+.thinkgraph-eyebrow {
+    display: block;
+    color: var(--color-accent-light);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.thinkgraph-story h3,
+.thinkgraph-gallery-heading h3,
+.thinkgraph-agents-heading h3 {
+    margin: var(--spacing-sm) 0 var(--spacing-lg);
+    font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+    line-height: 1.2;
+}
+
+.thinkgraph-story p,
+.thinkgraph-agent p {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+}
+
+.thinkgraph-story p + p {
+    margin-top: var(--spacing-md);
+}
+
+.thinkgraph-pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.thinkgraph-pipeline span {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-sm);
+    background: rgba(99, 102, 241, 0.11);
+}
+
+.thinkgraph-pipeline i {
+    color: var(--color-accent);
+}
+
+.thinkgraph-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+}
+
+.thinkgraph-stack span {
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-full);
+    background: rgba(6, 182, 212, 0.11);
+    color: var(--color-accent-light);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+.thinkgraph-access {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    min-height: 44px;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.thinkgraph-access:hover {
+    color: var(--color-accent-light);
+}
+
+.thinkgraph-access:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 4px;
+}
+
+.thinkgraph-agents {
+    margin-top: var(--spacing-3xl);
+}
+
+.thinkgraph-gallery {
+    margin-top: var(--spacing-3xl);
+}
+
+.thinkgraph-gallery-heading {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.thinkgraph-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.thinkgraph-gallery-card {
+    min-width: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.thinkgraph-gallery-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+}
+
+.thinkgraph-gallery-card:focus-visible,
+.thinkgraph-gallery-dialog button:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 3px;
+}
+
+.thinkgraph-gallery-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.thinkgraph-gallery-caption {
+    display: grid;
+    gap: 0.35rem;
+    padding: var(--spacing-md);
+}
+
+.thinkgraph-gallery-caption strong {
+    font-size: var(--font-size-base);
+}
+
+.thinkgraph-gallery-caption span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.thinkgraph-agents-heading {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.thinkgraph-agents-heading p {
+    color: var(--color-text-muted);
+}
+
+.thinkgraph-agent-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.thinkgraph-agent-controls > span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.thinkgraph-agent-controls button {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-full);
+    background: rgba(27, 29, 43, 0.9);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.thinkgraph-agent-controls button:first-child,
+.thinkgraph-agent-controls button:last-child {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.thinkgraph-agent-controls button:hover {
+    border-color: var(--color-accent);
+    background: rgba(99, 102, 241, 0.18);
+}
+
+.thinkgraph-agent-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.thinkgraph-agent-controls button:disabled:hover {
+    border-color: var(--color-border-hover);
+    background: rgba(27, 29, 43, 0.9);
+}
+
+.thinkgraph-agent-controls button:focus-visible,
+.thinkgraph-agent-scroller:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 3px;
+}
+
+.thinkgraph-agent-scroller {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    padding: 4px 0 18px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(129, 140, 248, 0.7) rgba(255, 255, 255, 0.08);
+    overscroll-behavior-inline: contain;
+    touch-action: pan-x;
+    scroll-snap-type: x proximity;
+}
+
+.thinkgraph-agent-scroller::-webkit-scrollbar {
+    height: 8px;
+}
+
+.thinkgraph-agent-scroller::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+}
+
+.thinkgraph-agent-scroller::-webkit-scrollbar-thumb {
+    background: rgba(129, 140, 248, 0.7);
+    border-radius: var(--radius-full);
+}
+
+.thinkgraph-agent {
+    flex: 0 0 270px;
+    scroll-snap-align: start;
+    min-height: 205px;
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(145deg, rgba(30, 31, 45, 0.96), rgba(20, 21, 31, 0.96));
+}
+
+.thinkgraph-agent-topline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.thinkgraph-agent-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background: rgba(110, 120, 220, 0.13);
+}
+
+.thinkgraph-agent-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.thinkgraph-agent-group-label {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(116, 130, 177, 0.28);
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.thinkgraph-agent h4 {
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-base);
+}
+
+.thinkgraph-agent p {
+    font-size: var(--font-size-sm);
+}
+
+.thinkgraph-gallery-dialog {
+    width: min(1120px, calc(100vw - 32px));
+    max-width: none;
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    overflow: auto;
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-card);
+    color: var(--color-text);
+}
+
+.thinkgraph-gallery-dialog::backdrop {
+    background: rgba(2, 4, 14, 0.88);
+    backdrop-filter: blur(8px);
+}
+
+.thinkgraph-gallery-dialog-content {
+    position: relative;
+}
+
+.thinkgraph-gallery-dialog-content > img {
+    display: block;
+    width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+    background: #08080c;
+}
+
+.thinkgraph-dialog-close,
+.thinkgraph-dialog-controls button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-md);
+    background: rgba(18, 22, 35, 0.94);
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.thinkgraph-dialog-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+}
+
+.thinkgraph-dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.thinkgraph-dialog-footer p {
+    margin-top: 0.25rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.thinkgraph-dialog-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    white-space: nowrap;
+}
+
+@media (max-width: 1050px) {
+    .thinkgraph-showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .thinkgraph-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .thinkgraph-agent {
+        flex-basis: min(78vw, 270px);
+    }
+
+    .thinkgraph-agent-controls > span {
+        font-size: 0.75rem;
+    }
+
+    .thinkgraph-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .thinkgraph-dialog-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .thinkgraph-pipeline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+
+    .thinkgraph-pipeline i {
+        transform: rotate(90deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .thinkgraph-agent-controls button {
+        transition: none;
+    }
+
+    .thinkgraph-gallery-card {
+        transition: none;
+    }
+
+    .thinkgraph-gallery-card:hover {
+        transform: none;
+    }
+}
